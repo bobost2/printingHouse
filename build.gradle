@@ -25,8 +25,8 @@ tasks.withType(JavaCompile).configureEach {
 }
 
 application {
-    mainModule = 'bstefanov.printinghouse.printinghouse'
-    mainClass = 'bstefanov.printinghouse.printinghouse.HelloApplication'
+    mainModule = 'bstefanov.printinghouse'
+    mainClass = 'bstefanov.printinghouse.HelloApplication'
 }
 
 javafx {

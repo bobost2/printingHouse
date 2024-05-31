@@ -1,9 +1,9 @@
-module bstefanov.printinghouse.printinghouse {
+module bstefanov.printinghouse {
     requires javafx.controls;
     requires javafx.fxml;
 
     requires org.controlsfx.controls;
 
-    opens bstefanov.printinghouse.printinghouse to javafx.fxml;
-    exports bstefanov.printinghouse.printinghouse;
+    opens bstefanov.printinghouse to javafx.fxml;
+    exports bstefanov.printinghouse;
 }

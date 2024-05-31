@@ -1,4 +1,4 @@
-package bstefanov.printinghouse.printinghouse;
+package bstefanov.printinghouse;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
