@@ -1,8 +1,6 @@
 package bstefanov.printinghouse.service;
 
-import bstefanov.printinghouse.data.audit.AuditableRecord;
-import bstefanov.printinghouse.data.audit.EditionPrinted;
-import bstefanov.printinghouse.data.audit.EmployeePay;
+import bstefanov.printinghouse.data.audit.*;
 import bstefanov.printinghouse.data.edition.Edition;
 import bstefanov.printinghouse.data.employee.Employee;
 import bstefanov.printinghouse.data.paper.PaperPrice;
@@ -14,21 +12,22 @@ import java.util.HashSet;
 
 public class AuditingService {
     private ArrayList<AuditableRecord> audit;
-    private BigDecimal expectedRevenue;
+    private BigDecimal expectedProfit;
     private PaperPrice paperPrice;
     private double bonusPercentage;
     private double discountPercentage;
+    private BigDecimal profit;
 
     public AuditingService() {
         audit = new ArrayList<>();
     }
 
-    public BigDecimal getExpectedRevenue() {
-        return expectedRevenue;
+    public BigDecimal getExpectedProfit() {
+        return expectedProfit;
     }
 
-    public void setExpectedRevenue(BigDecimal expectedRevenue) {
-        this.expectedRevenue = expectedRevenue;
+    public void setExpectedProfit(BigDecimal expectedProfit) {
+        this.expectedProfit = expectedProfit;
     }
 
     public PaperPrice getPaperPrice() {
@@ -56,7 +55,13 @@ public class AuditingService {
     }
 
     public void recordSell(Edition edition, int copies, boolean applyDiscount) {
-        // TODO: Implement this method
+        BigDecimal price = edition.getPrice().multiply(BigDecimal.valueOf(copies));
+        if (applyDiscount) {
+            price = price.min(price.multiply(BigDecimal.valueOf(discountPercentage/100)));
+        }
+
+        EditionSold soldLog = new EditionSold(edition, copies, price);
+        audit.add(soldLog);
     }
 
     public void recordPrinted(Printer printer, Edition edition) {
@@ -67,6 +72,18 @@ public class AuditingService {
         audit.add(printedLog);
     }
 
+    public boolean calculateProfitAndCheckIfExpectationsAreMet() {
+        profit = new BigDecimal(0);
+        for (AuditableRecord record : audit) {
+            if (record.moneyGainedOrLost().compareTo(BigDecimal.ZERO) > 0)
+            {
+                profit = profit.add(record.moneyGainedOrLost());
+            }
+        }
+
+        return profit.compareTo(expectedProfit) > 0;
+    }
+
     public void recordEmployeePay(HashSet<Employee> employees) {
         for (Employee employee : employees) {
             EmployeePay pay = new EmployeePay(employee);
@@ -75,22 +92,7 @@ public class AuditingService {
     }
 
     // We need the employees to calculate their pay and bonus
-    // TODO: This should return a serializable object
-    public void getDayReport() {
-        BigDecimal revenue = new BigDecimal(0);
-
-        for (AuditableRecord record : audit) {
-            revenue = revenue.add(record.moneyGainedOrLost());
-        }
-
-        System.out.println("Total revenue: " + revenue);
-    }
-    public void saveDayReport() {
-        // TODO: Implement this method
-    }
-
-    // TODO: This should return a serializable object
-    public void loadDayReport() {
-        // TODO: Implement this method
+    public FinalReport getDayReport() {
+        return new FinalReport(audit, expectedProfit);
     }
 }

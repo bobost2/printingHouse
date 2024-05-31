@@ -1,5 +1,6 @@
 package bstefanov.printinghouse.service;
 
+import bstefanov.printinghouse.data.audit.FinalReport;
 import bstefanov.printinghouse.data.configuration.EconomyConfig;
 import bstefanov.printinghouse.data.edition.Edition;
 import bstefanov.printinghouse.data.employee.Employee;
@@ -169,7 +170,7 @@ public class PrintingHouseService {
     }
 
     public void setExpectedRevenue(BigDecimal expectedRevenue) {
-        auditingService.setExpectedRevenue(expectedRevenue);
+        auditingService.setExpectedProfit(expectedRevenue);
     }
 
     public void startDay() {
@@ -184,7 +185,7 @@ public class PrintingHouseService {
         isDayStarted = true;
     }
 
-    public void endDayAndGetReport() {
+    public FinalReport endDayAndGetReport() {
         if ( !isDayStarted ) {
             throw new DayNotStartedYetException();
         }
@@ -197,8 +198,14 @@ public class PrintingHouseService {
             }
         }
 
+        if (auditingService.calculateProfitAndCheckIfExpectationsAreMet())
+        {
+            employeeService.setBonuses(auditingService.getBonusPercentage());
+        }
+
         auditingService.recordEmployeePay(employeeService.getEmployees());
-        auditingService.getDayReport();
+
+        return auditingService.getDayReport();
 
         // Should the expected editions be cleared?
         //expectedEditions.clear();
