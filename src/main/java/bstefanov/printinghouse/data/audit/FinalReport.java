@@ -28,9 +28,9 @@ public class FinalReport implements Serializable {
         }
 
         profit = tempProfit;
-        losses = tempLosses;
+        losses = tempLosses.multiply(BigDecimal.valueOf(-1));
 
-        total = profit.min(losses);
+        total = profit.subtract(losses);
     }
 
     public ArrayList<AuditableRecord> getAudit() {
@@ -51,5 +51,16 @@ public class FinalReport implements Serializable {
 
     public BigDecimal getTotal() {
         return total;
+    }
+
+    @Override
+    public String toString() {
+        return "FinalReport{" +
+                "audit=" + audit +
+                ", expectedProfit=" + expectedProfit +
+                ", profit=" + profit +
+                ", losses=" + losses +
+                ", total=" + total +
+                '}';
     }
 }

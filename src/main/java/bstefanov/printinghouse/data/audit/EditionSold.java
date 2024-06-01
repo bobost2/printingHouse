@@ -28,4 +28,12 @@ public class EditionSold implements AuditableRecord {
     public BigDecimal moneyGainedOrLost() {
         return totalPrice;
     }
+
+    @Override
+    public String toString() {
+        return "EditionSold{" +
+                ", recordDetails=" + recordDetails() +
+                ", totalPrice=" + moneyGainedOrLost() +
+                '}';
+    }
 }

@@ -86,4 +86,26 @@ class EmployeeServiceTest {
             }
         }
     }
+
+    @Test
+    @DisplayName("Set salaries with no bonuses test")
+    void setSalariesWithNoBonusesTest() {
+        Manager manager = new Manager("Toshko");
+        Operator employee1 = new Operator("Pesho", manager);
+        Operator employee2 = new Operator("Gosho", manager);
+
+        employeeService.hireEmployee(manager);
+        employeeService.hireEmployee(employee1);
+        employeeService.hireEmployee(employee2);
+
+        employeeService.setSalaries(new BigDecimal(1000));
+        employeeService.setBonuses(0);
+
+        HashSet<Employee> employees = employeeService.getEmployees();
+
+        for (Employee employee : employees) {
+            assertEquals(new BigDecimal(1000).setScale(5, RoundingMode.HALF_UP),
+                    employee.getSalary().setScale(5, RoundingMode.HALF_UP));
+        }
+    }
 }

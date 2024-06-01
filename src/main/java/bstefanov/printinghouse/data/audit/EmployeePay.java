@@ -3,6 +3,7 @@ package bstefanov.printinghouse.data.audit;
 import bstefanov.printinghouse.data.employee.Employee;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 public class EmployeePay implements AuditableRecord{
     private final Employee employee;
@@ -16,9 +17,16 @@ public class EmployeePay implements AuditableRecord{
         return "[-] Paid employee " + employee.getName() + " for the day";
     }
 
-    @SuppressWarnings("BigDecimalMethodWithoutRoundingCalled")
     @Override
     public BigDecimal moneyGainedOrLost() {
-        return employee.getSalary().multiply(BigDecimal.valueOf(-1)).divide(BigDecimal.valueOf(31));
+        return employee.getSalary().multiply(BigDecimal.valueOf(-1)).divide(BigDecimal.valueOf(31), 5, RoundingMode.HALF_UP);
+    }
+
+    @Override
+    public String toString() {
+        return "EmployeePay{" +
+                ", recordDetails=" + recordDetails() +
+                ", totalPrice=" + moneyGainedOrLost() +
+                '}';
     }
 }

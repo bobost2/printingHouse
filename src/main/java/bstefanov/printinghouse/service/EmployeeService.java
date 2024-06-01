@@ -4,6 +4,7 @@ import bstefanov.printinghouse.data.employee.Employee;
 import bstefanov.printinghouse.data.employee.Manager;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.HashSet;
 
 public class EmployeeService {
@@ -43,13 +44,12 @@ public class EmployeeService {
         employees.remove(employee);
     }
 
-    @SuppressWarnings("BigDecimalMethodWithoutRoundingCalled")
     public void getAverageSalary() {
         BigDecimal sum = BigDecimal.ZERO;
         for (Employee employee : employees) {
             sum = sum.add(employee.getSalary());
         }
-        System.out.println(sum.divide(BigDecimal.valueOf(employees.size())));
+        System.out.println(sum.divide(BigDecimal.valueOf(employees.size()), 5, RoundingMode.HALF_UP));
     }
 
     public void setSalaries(BigDecimal baseSalary) {

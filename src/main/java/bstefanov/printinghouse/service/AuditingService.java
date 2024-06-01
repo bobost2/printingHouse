@@ -57,7 +57,7 @@ public class AuditingService {
     public void recordSell(Edition edition, int copies, boolean applyDiscount) {
         BigDecimal price = edition.getPrice().multiply(BigDecimal.valueOf(copies));
         if (applyDiscount) {
-            price = price.min(price.multiply(BigDecimal.valueOf(discountPercentage/100)));
+            price = price.subtract(price.multiply(BigDecimal.valueOf(discountPercentage/100)));
         }
 
         EditionSold soldLog = new EditionSold(edition, copies, price);

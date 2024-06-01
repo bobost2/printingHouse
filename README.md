@@ -3,7 +3,7 @@
 
 ### What are the goals of this project?
 - [X] The core application (that matches the requirements)
-- [ ] Adding unit tests
+- [X] Adding unit tests
 - [ ] Add a way to interact with the application (e.g. with a JavaFX GUI)
 
 ### Things to improve:

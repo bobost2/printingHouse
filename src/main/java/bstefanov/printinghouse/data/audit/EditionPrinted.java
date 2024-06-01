@@ -26,4 +26,12 @@ public class EditionPrinted implements AuditableRecord{
     public BigDecimal moneyGainedOrLost() {
         return totalPrice.multiply(BigDecimal.valueOf(-1));
     }
+
+    @Override
+    public String toString() {
+        return "EditionPrinted{" +
+                ", recordDetails=" + recordDetails() +
+                ", totalPrice=" + moneyGainedOrLost() +
+                '}';
+    }
 }

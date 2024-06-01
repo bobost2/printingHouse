@@ -118,7 +118,7 @@ public class PrintingHouseService {
     }
 
     // Additional methods
-    public void printEdition(Printer printer, Edition edition, CartridgeType cartridgeType, int copies) {
+    public boolean printEdition(Printer printer, Edition edition, CartridgeType cartridgeType, int copies) {
         if ( !isDayStarted ) {
             throw new DayNotStartedYetException();
         }
@@ -129,8 +129,13 @@ public class PrintingHouseService {
 
         if ( printer.print(edition, cartridgeType, copies) )
         {
-            printedEditions.add(edition);
+            for ( int i = 0; i < copies; i++ ) {
+                printedEditions.add(edition);
+            }
+            return true;
         }
+
+        return false;
     }
 
     public void sellEdition(Edition edition, int copies) {
@@ -157,7 +162,7 @@ public class PrintingHouseService {
             printedEditions.remove(edition);
         }
 
-        boolean applyDiscount = copies > expectedEditions.get(edition);
+        boolean applyDiscount = totalCopies > expectedEditions.get(edition);
 
         auditingService.recordSell(edition, copies, applyDiscount);
     }
