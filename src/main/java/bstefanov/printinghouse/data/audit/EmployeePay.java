@@ -16,8 +16,9 @@ public class EmployeePay implements AuditableRecord{
         return "[-] Paid employee " + employee.getName() + " for the day";
     }
 
+    @SuppressWarnings("BigDecimalMethodWithoutRoundingCalled")
     @Override
     public BigDecimal moneyGainedOrLost() {
-        return employee.getSalary().multiply(BigDecimal.valueOf(-1));
+        return employee.getSalary().multiply(BigDecimal.valueOf(-1)).divide(BigDecimal.valueOf(31));
     }
 }

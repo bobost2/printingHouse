@@ -7,10 +7,12 @@ import java.math.BigDecimal;
 import java.util.HashSet;
 
 public class EmployeeService {
-    HashSet<Employee> employees;
+    private HashSet<Employee> employees;
+    private BigDecimal baseSalary;
 
     public EmployeeService() {
         employees = new HashSet<>();
+        setSalaries(BigDecimal.ONE);
     }
 
     public EmployeeService(BigDecimal baseSalary) {
@@ -20,6 +22,7 @@ public class EmployeeService {
 
     public EmployeeService(HashSet<Employee> employees) {
         this.employees = employees;
+        setSalaries(BigDecimal.ONE);
     }
 
     public EmployeeService(HashSet<Employee> employees, BigDecimal baseSalary) {
@@ -29,6 +32,7 @@ public class EmployeeService {
 
     public void hireEmployee(Employee employee) {
         employees.add(employee);
+        employee.setSalary(baseSalary);
     }
 
     public HashSet<Employee> getEmployees() {
@@ -39,7 +43,17 @@ public class EmployeeService {
         employees.remove(employee);
     }
 
+    @SuppressWarnings("BigDecimalMethodWithoutRoundingCalled")
+    public void getAverageSalary() {
+        BigDecimal sum = BigDecimal.ZERO;
+        for (Employee employee : employees) {
+            sum = sum.add(employee.getSalary());
+        }
+        System.out.println(sum.divide(BigDecimal.valueOf(employees.size())));
+    }
+
     public void setSalaries(BigDecimal baseSalary) {
+        this.baseSalary = baseSalary;
         for (Employee employee : employees) {
             employee.setSalary(baseSalary);
         }

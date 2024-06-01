@@ -15,7 +15,7 @@ public abstract class Employee {
         this.id = UUID.randomUUID();
         this.name = name;
         this.hireDate = new Date();
-        this.salary = BigDecimal.ZERO;
+        this.salary = BigDecimal.ONE;
     }
 
     public String getName() {
@@ -39,7 +39,11 @@ public abstract class Employee {
     }
 
     public void setSalary(BigDecimal salary) {
-        this.salary = salary;
+        // Probably better to use a custom exception here?
+        if (salary.compareTo(BigDecimal.ZERO) > 0)
+        {
+            this.salary = salary;
+        }
     }
 
     public UUID getId() {
@@ -49,10 +53,10 @@ public abstract class Employee {
     @Override
     public String toString() {
         return "Employee{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", hireDate=" + hireDate +
-                ", salary=" + salary +
+                "id=" + getId() +
+                ", name='" + getName() + '\'' +
+                ", hireDate=" + getHireDate() +
+                ", salary=" + getSalary() +
                 '}';
     }
 
