@@ -23,6 +23,7 @@ public class Printer {
         this.model = model;
         this.cartridgeType = cartridgeType;
         this.maxAmountOfPaper = maxAmountOfPaper;
+        this.printedEditions = new ArrayList<>();
     }
 
     public CartridgeType getCartridgeType() {
