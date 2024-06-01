@@ -54,7 +54,8 @@ public class PaperPrice {
             return paperPrice.get(paperType);
         }
 
-        return paperPrice.get(paperType).multiply(new BigDecimal(size.getValue() * sizePercentageMultiplier / 100));
+        return paperPrice.get(paperType).add(paperPrice.get(paperType).multiply(
+                new BigDecimal(sizePercentageMultiplier / 100)).multiply(new BigDecimal(size.getValue())));
     }
 
     public void setPrice(PaperType paperType, BigDecimal price) {
