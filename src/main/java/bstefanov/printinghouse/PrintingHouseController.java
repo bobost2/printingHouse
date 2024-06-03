@@ -6,7 +6,10 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.Spinner;
+import javafx.scene.control.TextField;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
@@ -19,20 +22,49 @@ public class PrintingHouseController {
     private static final double offsetX = 16.5;
     private static final double offsetY = 39;
 
-//    @FXML
-//    private Label welcomeText;
+    @FXML
+    private TextField nameTextBox;
+
+    @FXML
+    private TextField addressTextBox;
+
+    @FXML
+    private Spinner<Double> baseSalaryTextBox;
+
+    @FXML
+    private Spinner<Double> salaryBonusTextBox;
+
+    @FXML
+    private Spinner<Double> discountTextBox;
+
+    @FXML
+    private Button createNewButton;
 //
 //    @FXML
 //    protected void onHelloButtonClick() {
 //        welcomeText.setText("Welcome to JavaFX Application!");
 //    }
-    @FXML
-    protected void onClickMenuSelectPrintingHouse(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("select-printing-house-view.fxml"));
+    private void switchPane(ActionEvent event, String fxml) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource(fxml));
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Scene scene = new Scene(root, stage.getWidth() - offsetX, stage.getHeight() - offsetY);
         stage.setScene(scene);
         stage.show();
+    }
+
+    @FXML
+    protected void onClickMenuSelectPrintingHouse(ActionEvent event) throws IOException {
+        switchPane(event, "select-printing-house-view.fxml");
+    }
+
+    @FXML
+    protected void onClickGoBackToMainView(ActionEvent event) throws IOException {
+        switchPane(event, "main-view.fxml");
+    }
+
+    @FXML
+    protected void onClickCreatePrintingHouseMenu(ActionEvent event) throws IOException {
+        switchPane(event, "create-printing-house-view.fxml");
     }
 
     @FXML
@@ -49,14 +81,5 @@ public class PrintingHouseController {
         } else {
             System.out.println("File selection cancelled.");
         }
-    }
-
-    @FXML
-    protected void onClickGoBackToMainView(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("main-view.fxml"));
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        Scene scene = new Scene(root, stage.getWidth() - offsetX, stage.getHeight() - offsetY);
-        stage.setScene(scene);
-        stage.show();
     }
 }

@@ -13,11 +13,11 @@ public class PrintingHouseApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(PrintingHouseApplication.class.getResource("main-view.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 800, 400);
+        Scene scene = new Scene(fxmlLoader.load(), 800, 450);
         stage.setTitle("Printing House Application");
         stage.setScene(scene);
-        stage.setMinWidth(420);
-        stage.setMinHeight(240);
+        stage.setMinWidth(500);
+        stage.setMinHeight(450);
         stage.show();
     }
 
