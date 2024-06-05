@@ -1,7 +1,5 @@
 package bstefanov.printinghouse;
 
-import bstefanov.printinghouse.service.PrintingHouseService;
-
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;

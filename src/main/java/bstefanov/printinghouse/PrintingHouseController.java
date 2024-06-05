@@ -18,9 +18,22 @@ import java.io.IOException;
 
 public class PrintingHouseController {
 
-    // Windows offset (MacOS and Linux may need different values)
-    private static final double offsetX = 16.5;
-    private static final double offsetY = 39;
+    // Window offset
+    private static final double offsetX;
+    private static final double offsetY;
+
+    static {
+        String userOS = System.getProperty("os.name").toLowerCase();
+        if (userOS.contains("win")) {
+            offsetX = 16.5;
+            offsetY = 39;
+        }
+        else // For Mac and Linux (Linux is not tested)
+        {
+            offsetX = 0;
+            offsetY = 28;
+        }
+    }
 
     @FXML
     private TextField nameTextBox;
