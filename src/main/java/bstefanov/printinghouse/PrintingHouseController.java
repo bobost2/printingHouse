@@ -1,22 +1,33 @@
 package bstefanov.printinghouse;
 
+import bstefanov.printinghouse.data.configuration.EconomyConfig;
+import bstefanov.printinghouse.data.paper.PaperPrice;
+import bstefanov.printinghouse.service.PrintingHouseService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.Spinner;
+import javafx.scene.control.SpinnerValueFactory;
 import javafx.scene.control.TextField;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import javafx.util.StringConverter;
 
 import java.io.File;
 import java.io.IOException;
+import java.math.BigDecimal;
+import java.net.URL;
+import java.text.DecimalFormat;
+import java.text.ParseException;
+import java.util.ArrayList;
+import java.util.ResourceBundle;
 
-public class PrintingHouseController {
+public class PrintingHouseController implements Initializable {
 
     // Window offset
     private static final double offsetX;
@@ -34,6 +45,8 @@ public class PrintingHouseController {
             offsetY = 28;
         }
     }
+    static private String currentFxml;
+    static private ArrayList<PrintingHouseService> printingHouses = new ArrayList<>();
 
     @FXML
     private TextField nameTextBox;
@@ -52,13 +65,11 @@ public class PrintingHouseController {
 
     @FXML
     private Button createNewButton;
-//
-//    @FXML
-//    protected void onHelloButtonClick() {
-//        welcomeText.setText("Welcome to JavaFX Application!");
-//    }
+
     private void switchPane(ActionEvent event, String fxml) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource(fxml));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(fxml));
+        currentFxml = fxml;
+        Parent root = fxmlLoader.load();
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Scene scene = new Scene(root, stage.getWidth() - offsetX, stage.getHeight() - offsetY);
         stage.setScene(scene);
@@ -83,7 +94,8 @@ public class PrintingHouseController {
     @FXML
     protected void onClickMenuLoadReport(ActionEvent event) {
         FileChooser fileChooser = new FileChooser();
-        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Printing House Report", "*.phr"));
+        fileChooser.getExtensionFilters().add(
+                new FileChooser.ExtensionFilter("Printing House Report", "*.phr"));
         fileChooser.setTitle("Load Report File");
 
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -95,4 +107,77 @@ public class PrintingHouseController {
             System.out.println("File selection cancelled.");
         }
     }
+
+    @FXML
+    protected void onClickCreatePrintingHouse(ActionEvent event) throws IOException {
+        String name = nameTextBox.getText();
+        String address = addressTextBox.getText();
+        double baseSalary = baseSalaryTextBox.getValue();
+        double salaryBonus = salaryBonusTextBox.getValue();
+        double discount = discountTextBox.getValue();
+
+        PrintingHouseService printingHouse = new PrintingHouseService(name, address);
+        printingHouse.applyEconomyConfig(
+                new EconomyConfig(salaryBonus, discount, new PaperPrice(), new BigDecimal(baseSalary)));
+        printingHouses.add(printingHouse);
+
+        onClickMenuSelectPrintingHouse(event);
+    }
+
+    @FXML
+    protected void onChangedTextFieldCreateHouse() {
+        createNewButton.setDisable(nameTextBox.getText().isBlank() || addressTextBox.getText().isBlank());
+    }
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        if ("create-printing-house-view.fxml".equals(currentFxml)) {
+            SpinnerValueFactory<Double> baseSalaryFactory =
+                    new SpinnerValueFactory.DoubleSpinnerValueFactory(1.00, 100000.00, 700.00);
+            baseSalaryTextBox.setValueFactory(baseSalaryFactory);
+            baseSalaryTextBox.getValueFactory().setConverter(doubleStringConverter);
+
+            SpinnerValueFactory<Double> salaryBonusFactory =
+                    new SpinnerValueFactory.DoubleSpinnerValueFactory(0.00, 100.00, 25.00, 0.25);
+            salaryBonusTextBox.setValueFactory(salaryBonusFactory);
+            salaryBonusTextBox.getValueFactory().setConverter(doubleStringConverter);
+
+            SpinnerValueFactory<Double> discountFactory =
+                    new SpinnerValueFactory.DoubleSpinnerValueFactory(0.00, 100.00, 10.00, 0.25);
+            discountTextBox.setValueFactory(discountFactory);
+            discountTextBox.getValueFactory().setConverter(doubleStringConverter);
+        }
+    }
+
+    private final StringConverter<Double> doubleStringConverter = new StringConverter<>() {
+        private final DecimalFormat df = new DecimalFormat("#.00");
+
+        @Override
+        public String toString(Double value) {
+            if (value == null) {
+                return "";
+            }
+
+            return df.format(value);
+        }
+
+        @Override
+        public Double fromString(String string) {
+            try {
+                if (string == null) {
+                    return null;
+                }
+
+                string = string.trim();
+
+                if (string.isEmpty()) {
+                    return null;
+                }
+
+                return df.parse(string).doubleValue();
+            } catch (ParseException ex) {
+                throw new RuntimeException(ex);
+            }
+        }
+    };
 }
