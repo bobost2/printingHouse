@@ -3,6 +3,9 @@ package bstefanov.printinghouse;
 import bstefanov.printinghouse.data.configuration.EconomyConfig;
 import bstefanov.printinghouse.data.paper.PaperPrice;
 import bstefanov.printinghouse.service.PrintingHouseService;
+import bstefanov.printinghouse.ui.TableStruct;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -10,10 +13,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Spinner;
-import javafx.scene.control.SpinnerValueFactory;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.util.StringConverter;
@@ -65,6 +66,15 @@ public class PrintingHouseController implements Initializable {
 
     @FXML
     private Button createNewButton;
+
+    @FXML
+    private TableView<TableStruct> printingHouseSelectionTable;
+
+    @FXML
+    private TableColumn<TableStruct, String> printingHouseNameColumn;
+
+    @FXML
+    private TableColumn<TableStruct, String> printingHouseAddressColumn;
 
     private void switchPane(ActionEvent event, String fxml) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(fxml));
@@ -129,6 +139,13 @@ public class PrintingHouseController implements Initializable {
         createNewButton.setDisable(nameTextBox.getText().isBlank() || addressTextBox.getText().isBlank());
     }
 
+    protected void onSelectPrintingHouse(TableStruct tableStruct) {
+        int id = tableStruct.id;
+        String name = tableStruct.getName();
+        String address = tableStruct.getAddress();
+        System.out.println("Selected printing house: " + name + " " + address + " with id: " + id);
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         if ("create-printing-house-view.fxml".equals(currentFxml)) {
@@ -146,6 +163,29 @@ public class PrintingHouseController implements Initializable {
                     new SpinnerValueFactory.DoubleSpinnerValueFactory(0.00, 100.00, 10.00, 0.25);
             discountTextBox.setValueFactory(discountFactory);
             discountTextBox.getValueFactory().setConverter(doubleStringConverter);
+        }
+        else if ("select-printing-house-view.fxml".equals(currentFxml)) {
+            printingHouseNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
+            printingHouseAddressColumn.setCellValueFactory(new PropertyValueFactory<>("address"));
+
+            printingHouseSelectionTable.getItems().clear();
+            for (int i = 0; i < printingHouses.size(); i++) {
+                TableStruct tableStruct = new TableStruct();
+                tableStruct.id = i;
+                tableStruct.setName(printingHouses.get(i).getName());
+                tableStruct.setAddress(printingHouses.get(i).getAddress());
+                printingHouseSelectionTable.getItems().add(tableStruct);
+            }
+
+            printingHouseSelectionTable.setRowFactory( tv -> {
+                TableRow<TableStruct> row = new TableRow<>();
+                row.setOnMouseClicked(event -> {
+                    if (event.getClickCount() == 2 && (! row.isEmpty()) ) {
+                        onSelectPrintingHouse(row.getItem());
+                    }
+                });
+                return row ;
+            });
         }
     }
 

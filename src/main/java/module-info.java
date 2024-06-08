@@ -5,5 +5,7 @@ module bstefanov.printinghouse {
     requires org.controlsfx.controls;
 
     opens bstefanov.printinghouse to javafx.fxml;
+    opens bstefanov.printinghouse.ui to javafx.base;
+
     exports bstefanov.printinghouse;
 }
