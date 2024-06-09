@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="0.0" minWidth="0.0" prefHeight="400.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bstefanov.printinghouse.PrintingHouseController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="0.0" minWidth="0.0" prefHeight="400.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bstefanov.printinghouse.ui.controllers.PrintingHouseSettingsController">
    <top>
       <AnchorPane prefHeight="50.0" prefWidth="600.0" style="-fx-background-color: #575a8f;" BorderPane.alignment="CENTER">
          <children>
@@ -28,12 +28,12 @@
                <children>
                   <HBox alignment="BOTTOM_CENTER" prefHeight="100.0" prefWidth="200.0" spacing="30.0">
                      <children>
-                        <Button mnemonicParsing="false" onAction="#onClickEditGeneralSettings" prefWidth="180.0" style="-fx-background-color: #938acf;" text="General Settings" textFill="WHITE">
+                        <Button mnemonicParsing="false" onAction="#onClickGeneralSettingsButton" prefWidth="180.0" style="-fx-background-color: #938acf;" text="General Settings" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="14.0" />
                            </font>
                         </Button>
-                        <Button mnemonicParsing="false" onAction="#onClickEditEconomySettings" prefWidth="180.0" style="-fx-background-color: #938acf;" text="Economy Settings" textFill="WHITE">
+                        <Button mnemonicParsing="false" onAction="#onClickEconomySettingsButton" prefWidth="180.0" style="-fx-background-color: #938acf;" text="Economy Settings" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="14.0" />
                            </font>
@@ -45,12 +45,12 @@
                   </HBox>
                   <HBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="200.0" spacing="30.0">
                      <children>
-                        <Button mnemonicParsing="false" onAction="#onClickDestroyPrintingHouse" prefWidth="180.0" style="-fx-background-color: #938acf;" text="Destroy Printing House" textFill="WHITE">
+                        <Button mnemonicParsing="false" onAction="#onClickDestroyButton" prefWidth="180.0" style="-fx-background-color: #938acf;" text="Destroy Printing House" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="14.0" />
                            </font>
                         </Button>
-                        <Button mnemonicParsing="false" onAction="#onClickMenuPrintingHouseActions" prefWidth="180.0" style="-fx-background-color: #938acf;" text="Return To Operations" textFill="WHITE">
+                        <Button mnemonicParsing="false" onAction="#onClickReturnToOperationsButton" prefWidth="180.0" style="-fx-background-color: #938acf;" text="Return To Operations" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="14.0" />
                            </font>

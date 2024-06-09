@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bstefanov.printinghouse.PrintingHouseController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bstefanov.printinghouse.ui.controllers.SelectPrintingHouseController">
    <top>
       <AnchorPane maxHeight="50.0" minHeight="50.0" prefHeight="50.0" style="-fx-background-color: #575a8f;" BorderPane.alignment="CENTER">
          <children>
@@ -23,12 +23,12 @@
    <bottom>
       <AnchorPane prefHeight="50.0" style="-fx-background-color: #575a8f;" BorderPane.alignment="CENTER">
          <children>
-            <Button mnemonicParsing="false" onAction="#onClickGoBackToMainView" style="-fx-background-color: #ff5e6c;" text="Go Back" textFill="WHITE" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="10.0">
+            <Button mnemonicParsing="false" onAction="#onClickGoBack" style="-fx-background-color: #ff5e6c;" text="Go Back" textFill="WHITE" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="10.0">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
             </Button>
-            <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#onClickCreatePrintingHouseMenu" style="-fx-background-color: #709dff;" text="Create New" textFill="WHITE" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
+            <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#onClickAddButton" style="-fx-background-color: #709dff;" text="Create New" textFill="WHITE" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>

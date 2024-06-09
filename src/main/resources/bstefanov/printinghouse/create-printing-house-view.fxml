@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bstefanov.printinghouse.PrintingHouseController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bstefanov.printinghouse.ui.controllers.CreatePrintingHouseController">
    <top>
       <AnchorPane maxHeight="50.0" minHeight="50.0" prefHeight="50.0" style="-fx-background-color: #575a8f;" BorderPane.alignment="CENTER">
          <children>
@@ -27,12 +27,12 @@
    <bottom>
       <AnchorPane prefHeight="50.0" style="-fx-background-color: #575a8f;" BorderPane.alignment="CENTER">
          <children>
-            <Button mnemonicParsing="false" onAction="#onClickMenuSelectPrintingHouse" style="-fx-background-color: #ff5e6c;" text="Go Back" textFill="WHITE" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="10.0">
+            <Button mnemonicParsing="false" onAction="#onClickGoBackButton" style="-fx-background-color: #ff5e6c;" text="Go Back" textFill="WHITE" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="10.0">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
             </Button>
-            <Button fx:id="createNewButton" disable="true" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#onClickCreatePrintingHouse" style="-fx-background-color: #709dff;" text="Create" textFill="WHITE" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
+            <Button fx:id="createNewButton" disable="true" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#onClickCreateNewButton" style="-fx-background-color: #709dff;" text="Create" textFill="WHITE" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
@@ -72,12 +72,12 @@
                   <Insets left="20.0" />
                </GridPane.margin>
             </Label>
-            <TextField fx:id="nameTextBox" maxWidth="200.0" onKeyTyped="#onChangedTextFieldCreateHouse" prefWidth="200.0" style="-fx-background-color: #938acf;" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+            <TextField fx:id="nameTextBox" maxWidth="200.0" onKeyTyped="#onChangedTextField" prefWidth="200.0" style="-fx-background-color: #938acf;" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
                <GridPane.margin>
                   <Insets left="20.0" right="200.0" />
                </GridPane.margin>
             </TextField>
-            <TextField fx:id="addressTextBox" maxWidth="1.7976931348623157E308" onKeyTyped="#onChangedTextFieldCreateHouse" style="-fx-background-color: #938acf;" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+            <TextField fx:id="addressTextBox" maxWidth="1.7976931348623157E308" onKeyTyped="#onChangedTextField" style="-fx-background-color: #938acf;" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
                <GridPane.margin>
                   <Insets left="20.0" right="20.0" />
                </GridPane.margin>

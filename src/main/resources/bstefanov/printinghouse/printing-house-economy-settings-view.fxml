@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="1.7976931348623157E308" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bstefanov.printinghouse.PrintingHouseController">
+<BorderPane maxHeight="-Infinity" maxWidth="1.7976931348623157E308" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bstefanov.printinghouse.ui.controllers.PrintingHouseEconomySettingsController">
    <top>
       <AnchorPane maxHeight="50.0" minHeight="50.0" prefHeight="50.0" style="-fx-background-color: #575a8f;" BorderPane.alignment="CENTER">
          <children>
@@ -28,12 +28,12 @@
    <bottom>
       <AnchorPane prefHeight="50.0" style="-fx-background-color: #575a8f;" BorderPane.alignment="CENTER">
          <children>
-            <Button mnemonicParsing="false" onAction="#onClickMenuSettings" style="-fx-background-color: #ff5e6c;" text="Go Back" textFill="WHITE" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="10.0">
+            <Button mnemonicParsing="false" onAction="#onClickGoBackButton" style="-fx-background-color: #ff5e6c;" text="Go Back" textFill="WHITE" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="10.0">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
             </Button>
-            <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#onClickSaveEconomySettings" style="-fx-background-color: #709dff;" text="Edit" textFill="WHITE" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
+            <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#onClickEditButton" style="-fx-background-color: #709dff;" text="Edit" textFill="WHITE" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
@@ -88,14 +88,14 @@
                                     <Font name="System Bold" size="16.0" />
                                  </font>
                               </Label>
-                              <Spinner fx:id="glossyPriceEditTextBox" editable="true" maxHeight="25.0" maxWidth="80.0" prefHeight="25.0" prefWidth="80.0" style="-fx-base: #938acf;" GridPane.columnIndex="1">
+                              <Spinner fx:id="glossyPriceTextBox" editable="true" maxHeight="25.0" maxWidth="80.0" prefHeight="25.0" prefWidth="80.0" style="-fx-base: #938acf;" GridPane.columnIndex="1">
                                  <GridPane.margin>
                                     <Insets />
                                  </GridPane.margin>
                               </Spinner>
-                              <Spinner fx:id="normalPriceEditTextBox" editable="true" maxHeight="25.0" maxWidth="80.0" prefHeight="25.0" prefWidth="80.0" style="-fx-base: #938acf;" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                              <Spinner fx:id="newsprintPriceEditTextBox" editable="true" maxHeight="25.0" maxWidth="80.0" prefHeight="25.0" prefWidth="80.0" style="-fx-base: #938acf;" GridPane.columnIndex="3" />
-                              <Spinner fx:id="sizePercentageMultiplierEditTextBox" editable="true" maxHeight="25.0" maxWidth="80.0" prefHeight="25.0" prefWidth="80.0" style="-fx-base: #938acf;" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+                              <Spinner fx:id="normalPriceTextBox" editable="true" maxHeight="25.0" maxWidth="80.0" prefHeight="25.0" prefWidth="80.0" style="-fx-base: #938acf;" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                              <Spinner fx:id="newsprintPriceTextBox" editable="true" maxHeight="25.0" maxWidth="80.0" prefHeight="25.0" prefWidth="80.0" style="-fx-base: #938acf;" GridPane.columnIndex="3" />
+                              <Spinner fx:id="sizePercentageMultiplierTextBox" editable="true" maxHeight="25.0" maxWidth="80.0" prefHeight="25.0" prefWidth="80.0" style="-fx-base: #938acf;" GridPane.columnIndex="3" GridPane.rowIndex="1" />
                            </children>
                         </GridPane>
                      </children>
@@ -137,9 +137,9 @@
                                     <Font name="System Bold" size="16.0" />
                                  </font>
                               </Label>
-                              <Spinner fx:id="baseSalaryEditTextBox" editable="true" maxHeight="25.0" maxWidth="100.0" prefHeight="25.0" prefWidth="100.0" style="-fx-base: #938acf;" GridPane.columnIndex="1" />
-                              <Spinner fx:id="salaryBonusEditTextBox" editable="true" maxHeight="25.0" maxWidth="80.0" prefHeight="25.0" prefWidth="80.0" style="-fx-base: #938acf;" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                              <Spinner fx:id="discountEditTextBox" editable="true" maxHeight="25.0" maxWidth="80.0" prefHeight="25.0" prefWidth="80.0" style="-fx-base: #938acf;" GridPane.columnIndex="3" />
+                              <Spinner fx:id="baseSalaryTextBox" editable="true" maxHeight="25.0" maxWidth="100.0" prefHeight="25.0" prefWidth="100.0" style="-fx-base: #938acf;" GridPane.columnIndex="1" />
+                              <Spinner fx:id="salaryBonusTextBox" editable="true" maxHeight="25.0" maxWidth="80.0" prefHeight="25.0" prefWidth="80.0" style="-fx-base: #938acf;" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                              <Spinner fx:id="discountTextBox" editable="true" maxHeight="25.0" maxWidth="80.0" prefHeight="25.0" prefWidth="80.0" style="-fx-base: #938acf;" GridPane.columnIndex="3" />
                            </children>
                         </GridPane>
                      </children>

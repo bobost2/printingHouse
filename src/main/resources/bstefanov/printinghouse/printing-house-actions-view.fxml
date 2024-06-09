@@ -10,7 +10,7 @@
 <?import javafx.scene.text.Font?>
 
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="0.0" minWidth="0.0" prefHeight="400.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bstefanov.printinghouse.PrintingHouseController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="0.0" minWidth="0.0" prefHeight="400.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bstefanov.printinghouse.ui.controllers.PrintingHouseActionsController">
    <top>
       <AnchorPane prefHeight="50.0" prefWidth="600.0" style="-fx-background-color: #575a8f;" BorderPane.alignment="CENTER">
          <children>
@@ -61,12 +61,12 @@
                               <Font name="System Bold" size="14.0" />
                            </font>
                         </Button>
-                        <Button mnemonicParsing="false" onAction="#onClickMenuSettings" prefWidth="130.0" style="-fx-background-color: #938acf;" text="Setttings" textFill="WHITE">
+                        <Button mnemonicParsing="false" onAction="#onClickSettingsButton" prefWidth="130.0" style="-fx-background-color: #938acf;" text="Setttings" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="14.0" />
                            </font>
                         </Button>
-                        <Button mnemonicParsing="false" onAction="#onClickMenuSelectPrintingHouse" prefWidth="130.0" style="-fx-background-color: #938acf;" text="Exit" textFill="WHITE">
+                        <Button mnemonicParsing="false" onAction="#onClickExitButton" prefWidth="130.0" style="-fx-background-color: #938acf;" text="Exit" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="14.0" />
                            </font>

@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="1.7976931348623157E308" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bstefanov.printinghouse.PrintingHouseController">
+<BorderPane maxHeight="-Infinity" maxWidth="1.7976931348623157E308" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bstefanov.printinghouse.ui.controllers.PrintingHouseGeneralSettingsController">
    <top>
       <AnchorPane maxHeight="50.0" minHeight="50.0" prefHeight="50.0" style="-fx-background-color: #575a8f;" BorderPane.alignment="CENTER">
          <children>
@@ -28,12 +28,12 @@
    <bottom>
       <AnchorPane prefHeight="50.0" style="-fx-background-color: #575a8f;" BorderPane.alignment="CENTER">
          <children>
-            <Button mnemonicParsing="false" onAction="#onClickMenuSettings" style="-fx-background-color: #ff5e6c;" text="Go Back" textFill="WHITE" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="10.0">
+            <Button mnemonicParsing="false" onAction="#onClickGoBackButton" style="-fx-background-color: #ff5e6c;" text="Go Back" textFill="WHITE" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="10.0">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
             </Button>
-            <Button fx:id="editGenSettingsButton" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#onClickSaveGeneralSettings" style="-fx-background-color: #709dff;" text="Edit" textFill="WHITE" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
+            <Button fx:id="editButton" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#onClickEditButton" style="-fx-background-color: #709dff;" text="Edit" textFill="WHITE" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
@@ -76,12 +76,12 @@
                                     <Font name="System Bold" size="16.0" />
                                  </font>
                               </Label>
-                              <TextField fx:id="nameEditTextBox" maxWidth="200.0" onKeyTyped="#onChangedTextFieldEditGenSettingsPrintingHouse" prefWidth="200.0" style="-fx-background-color: #938acf;" GridPane.columnIndex="1">
+                              <TextField fx:id="nameTextBox" maxWidth="200.0" onKeyTyped="#onChangedTextField" prefWidth="200.0" style="-fx-background-color: #938acf;" GridPane.columnIndex="1">
                                  <opaqueInsets>
                                     <Insets />
                                  </opaqueInsets>
                               </TextField>
-                              <TextField fx:id="addressEditTextBox" maxWidth="1.7976931348623157E308" onKeyTyped="#onChangedTextFieldEditGenSettingsPrintingHouse" prefWidth="400.0" style="-fx-background-color: #938acf;" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                              <TextField fx:id="addressTextBox" maxWidth="1.7976931348623157E308" onKeyTyped="#onChangedTextField" prefWidth="400.0" style="-fx-background-color: #938acf;" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                            </children>
                         </GridPane>
                      </children>

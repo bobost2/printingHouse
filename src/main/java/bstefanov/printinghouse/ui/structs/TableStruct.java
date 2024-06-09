@@ -1,4 +1,4 @@
-package bstefanov.printinghouse.ui;
+package bstefanov.printinghouse.ui.structs;
 
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
