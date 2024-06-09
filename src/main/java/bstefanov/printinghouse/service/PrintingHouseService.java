@@ -167,6 +167,15 @@ public class PrintingHouseService {
         auditingService.recordSell(edition, copies, applyDiscount);
     }
 
+    public EconomyConfig getEconomyConfig() {
+        EconomyConfig economyConfig = new EconomyConfig();
+        economyConfig.bonusPercentage = auditingService.getBonusPercentage();
+        economyConfig.discountPercentage = auditingService.getDiscountPercentage();
+        economyConfig.paperPrice = auditingService.getPaperPrice();
+        economyConfig.baseSalary = employeeService.getBaseSalary();
+        return economyConfig;
+    }
+
     public void applyEconomyConfig(EconomyConfig economyConfig) {
         auditingService.setBonusPercentage(economyConfig.bonusPercentage);
         auditingService.setDiscountPercentage(economyConfig.discountPercentage);

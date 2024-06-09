@@ -44,12 +44,19 @@ public class EmployeeService {
         employees.remove(employee);
     }
 
-    public void getAverageSalary() {
+    public BigDecimal getAverageSalary() {
         BigDecimal sum = BigDecimal.ZERO;
         for (Employee employee : employees) {
             sum = sum.add(employee.getSalary());
         }
-        System.out.println(sum.divide(BigDecimal.valueOf(employees.size()), 5, RoundingMode.HALF_UP));
+        if (employees.isEmpty()) {
+            return BigDecimal.ZERO;
+        }
+        return sum.divide(BigDecimal.valueOf(employees.size()), 5, RoundingMode.HALF_UP);
+    }
+
+    public BigDecimal getBaseSalary() {
+        return baseSalary;
     }
 
     public void setSalaries(BigDecimal baseSalary) {

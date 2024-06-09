@@ -2,10 +2,10 @@ package bstefanov.printinghouse;
 
 import bstefanov.printinghouse.data.configuration.EconomyConfig;
 import bstefanov.printinghouse.data.paper.PaperPrice;
+import bstefanov.printinghouse.data.paper.PaperSize;
+import bstefanov.printinghouse.data.paper.PaperType;
 import bstefanov.printinghouse.service.PrintingHouseService;
 import bstefanov.printinghouse.ui.TableStruct;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -26,6 +26,7 @@ import java.net.URL;
 import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class PrintingHouseController implements Initializable {
@@ -46,9 +47,14 @@ public class PrintingHouseController implements Initializable {
             offsetY = 28;
         }
     }
-    static private String currentFxml;
-    static private ArrayList<PrintingHouseService> printingHouses = new ArrayList<>();
 
+    // Static fields
+    static private String currentFxml;
+    @SuppressWarnings("FieldMayBeFinal")
+    static private ArrayList<PrintingHouseService> printingHouses = new ArrayList<>();
+    static private PrintingHouseService selectedPrintingHouse;
+
+    // Create Printing House
     @FXML
     private TextField nameTextBox;
 
@@ -67,6 +73,7 @@ public class PrintingHouseController implements Initializable {
     @FXML
     private Button createNewButton;
 
+    // Printing House Selection
     @FXML
     private TableView<TableStruct> printingHouseSelectionTable;
 
@@ -75,6 +82,42 @@ public class PrintingHouseController implements Initializable {
 
     @FXML
     private TableColumn<TableStruct, String> printingHouseAddressColumn;
+
+    // Title for the selected printing house
+    @FXML
+    private Label actionsMenuLabel;
+
+    // General Settings
+    @FXML
+    private TextField nameEditTextBox;
+
+    @FXML
+    private TextField addressEditTextBox;
+
+    @FXML
+    private Button editGenSettingsButton;
+
+    // Economy Settings
+    @FXML
+    private Spinner<Double> glossyPriceEditTextBox;
+
+    @FXML
+    private Spinner<Double> normalPriceEditTextBox;
+
+    @FXML
+    private Spinner<Double> newsprintPriceEditTextBox;
+
+    @FXML
+    private Spinner<Double> sizePercentageMultiplierEditTextBox;
+
+    @FXML
+    private Spinner<Double> baseSalaryEditTextBox;
+
+    @FXML
+    private Spinner<Double> salaryBonusEditTextBox;
+
+    @FXML
+    private Spinner<Double> discountEditTextBox;
 
     private void switchPane(ActionEvent event, String fxml) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(fxml));
@@ -139,53 +182,197 @@ public class PrintingHouseController implements Initializable {
         createNewButton.setDisable(nameTextBox.getText().isBlank() || addressTextBox.getText().isBlank());
     }
 
-    protected void onSelectPrintingHouse(TableStruct tableStruct) {
-        int id = tableStruct.id;
-        String name = tableStruct.getName();
-        String address = tableStruct.getAddress();
-        System.out.println("Selected printing house: " + name + " " + address + " with id: " + id);
+    @FXML
+    protected void onChangedTextFieldEditGenSettingsPrintingHouse() {
+        editGenSettingsButton.setDisable(nameEditTextBox.getText().isBlank() || addressEditTextBox.getText().isBlank());
+    }
+
+    @SuppressWarnings("ClassEscapesDefinedScope")
+    protected void onSelectPrintingHouse(ActionEvent actionEvent, TableStruct tableStruct) throws IOException {
+        selectedPrintingHouse = printingHouses.get(tableStruct.id);
+        onClickMenuPrintingHouseActions(actionEvent);
+    }
+
+    @FXML
+    protected void onClickMenuPrintingHouseActions(ActionEvent event) throws IOException {
+        switchPane(event, "printing-house-actions-view.fxml");
+    }
+
+    @FXML
+    protected void onClickMenuSettings(ActionEvent event) throws IOException {
+        switchPane(event, "printing-house-settings-view.fxml");
+    }
+
+    @FXML
+    protected void onClickDestroyPrintingHouse(ActionEvent event) throws IOException {
+        Alert alert = new Alert(Alert.AlertType.WARNING, "", ButtonType.OK, ButtonType.CANCEL);
+        alert.setTitle("Delete Printing House");
+        alert.setHeaderText("Are you sure you want to delete this printing house?");
+        alert.setContentText("This action cannot be undone.");
+        Optional<ButtonType> alertResult = alert.showAndWait();
+        if (alertResult.isPresent() && alertResult.get() == ButtonType.OK) {
+            printingHouses.remove(selectedPrintingHouse);
+            onClickMenuSelectPrintingHouse(event);
+        }
+    }
+
+    @FXML
+    protected void onClickEditGeneralSettings(ActionEvent event) throws IOException {
+        switchPane(event, "printing-house-general-settings-view.fxml");
+    }
+
+    @FXML
+    protected void onClickSaveGeneralSettings(ActionEvent event) throws IOException {
+        selectedPrintingHouse.setName(nameEditTextBox.getText());
+        selectedPrintingHouse.setAddress(addressEditTextBox.getText());
+        switchPane(event, "printing-house-settings-view.fxml");
+    }
+
+    @FXML
+    protected void onClickEditEconomySettings(ActionEvent event) throws IOException {
+        switchPane(event, "printing-house-economy-settings-view.fxml");
+    }
+
+    @FXML
+    protected void onClickSaveEconomySettings(ActionEvent event) throws IOException {
+        EconomyConfig economyConfig = selectedPrintingHouse.getEconomyConfig();
+        PaperPrice paperPrice = economyConfig.paperPrice;
+
+        paperPrice.setPrice(PaperType.GLOSSY, BigDecimal.valueOf(glossyPriceEditTextBox.getValue()));
+        paperPrice.setPrice(PaperType.NORMAL, BigDecimal.valueOf(normalPriceEditTextBox.getValue()));
+        paperPrice.setPrice(PaperType.NEWSPRINT, BigDecimal.valueOf(newsprintPriceEditTextBox.getValue()));
+        paperPrice.setSizePercentageMultiplier(sizePercentageMultiplierEditTextBox.getValue());
+
+        economyConfig.baseSalary = BigDecimal.valueOf(baseSalaryEditTextBox.getValue());
+        economyConfig.bonusPercentage = salaryBonusEditTextBox.getValue();
+        economyConfig.discountPercentage = discountEditTextBox.getValue();
+
+        selectedPrintingHouse.applyEconomyConfig(economyConfig);
+
+        switchPane(event, "printing-house-settings-view.fxml");
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        if ("create-printing-house-view.fxml".equals(currentFxml)) {
-            SpinnerValueFactory<Double> baseSalaryFactory =
-                    new SpinnerValueFactory.DoubleSpinnerValueFactory(1.00, 100000.00, 700.00);
-            baseSalaryTextBox.setValueFactory(baseSalaryFactory);
-            baseSalaryTextBox.getValueFactory().setConverter(doubleStringConverter);
-
-            SpinnerValueFactory<Double> salaryBonusFactory =
-                    new SpinnerValueFactory.DoubleSpinnerValueFactory(0.00, 100.00, 25.00, 0.25);
-            salaryBonusTextBox.setValueFactory(salaryBonusFactory);
-            salaryBonusTextBox.getValueFactory().setConverter(doubleStringConverter);
-
-            SpinnerValueFactory<Double> discountFactory =
-                    new SpinnerValueFactory.DoubleSpinnerValueFactory(0.00, 100.00, 10.00, 0.25);
-            discountTextBox.setValueFactory(discountFactory);
-            discountTextBox.getValueFactory().setConverter(doubleStringConverter);
+        if (currentFxml == null) {
+            currentFxml = "main-view.fxml";
         }
-        else if ("select-printing-house-view.fxml".equals(currentFxml)) {
-            printingHouseNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
-            printingHouseAddressColumn.setCellValueFactory(new PropertyValueFactory<>("address"));
+        switch (currentFxml)
+        {
+            case "create-printing-house-view.fxml":
+                SpinnerValueFactory<Double> baseSalaryFactory =
+                        new SpinnerValueFactory.DoubleSpinnerValueFactory(1.00, 100000.00, 700.00);
+                baseSalaryTextBox.setValueFactory(baseSalaryFactory);
+                baseSalaryTextBox.getValueFactory().setConverter(doubleStringConverter);
 
-            printingHouseSelectionTable.getItems().clear();
-            for (int i = 0; i < printingHouses.size(); i++) {
-                TableStruct tableStruct = new TableStruct();
-                tableStruct.id = i;
-                tableStruct.setName(printingHouses.get(i).getName());
-                tableStruct.setAddress(printingHouses.get(i).getAddress());
-                printingHouseSelectionTable.getItems().add(tableStruct);
-            }
+                SpinnerValueFactory<Double> salaryBonusFactory =
+                        new SpinnerValueFactory.DoubleSpinnerValueFactory(0.00, 100.00, 25.00, 0.25);
+                salaryBonusTextBox.setValueFactory(salaryBonusFactory);
+                salaryBonusTextBox.getValueFactory().setConverter(doubleStringConverter);
 
-            printingHouseSelectionTable.setRowFactory( tv -> {
-                TableRow<TableStruct> row = new TableRow<>();
-                row.setOnMouseClicked(event -> {
-                    if (event.getClickCount() == 2 && (! row.isEmpty()) ) {
-                        onSelectPrintingHouse(row.getItem());
-                    }
+                SpinnerValueFactory<Double> discountFactory =
+                        new SpinnerValueFactory.DoubleSpinnerValueFactory(0.00, 100.00, 10.00, 0.25);
+                discountTextBox.setValueFactory(discountFactory);
+                discountTextBox.getValueFactory().setConverter(doubleStringConverter);
+                break;
+
+            case "select-printing-house-view.fxml":
+                printingHouseNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
+                printingHouseAddressColumn.setCellValueFactory(new PropertyValueFactory<>("address"));
+
+                printingHouseSelectionTable.getItems().clear();
+                for (int i = 0; i < printingHouses.size(); i++) {
+                    TableStruct tableStruct = new TableStruct();
+                    tableStruct.id = i;
+                    tableStruct.setName(printingHouses.get(i).getName());
+                    tableStruct.setAddress(printingHouses.get(i).getAddress());
+                    printingHouseSelectionTable.getItems().add(tableStruct);
+                }
+
+                printingHouseSelectionTable.setRowFactory( tv -> {
+                    TableRow<TableStruct> row = new TableRow<>();
+                    row.setOnMouseClicked(event -> {
+                        if (event.getClickCount() == 2 && (! row.isEmpty()) ) {
+                            try {
+                                onSelectPrintingHouse(new ActionEvent(row, null), row.getItem());
+                            } catch (IOException e) {
+                                throw new RuntimeException(e);
+                            }
+                        }
+                    });
+                    return row;
                 });
-                return row ;
-            });
+                break;
+
+            case "printing-house-actions-view.fxml":
+                if (selectedPrintingHouse != null) {
+                    actionsMenuLabel.setText(selectedPrintingHouse.getName() + " - Select Operation:");
+                }
+                break;
+
+            case "printing-house-settings-view.fxml":
+                if (selectedPrintingHouse != null) {
+                    actionsMenuLabel.setText(selectedPrintingHouse.getName() + " - Settings:");
+                }
+                break;
+
+            case "printing-house-general-settings-view.fxml":
+                if (selectedPrintingHouse != null) {
+                    actionsMenuLabel.setText(selectedPrintingHouse.getName() + " - General Settings:");
+                    nameEditTextBox.setText(selectedPrintingHouse.getName());
+                    addressEditTextBox.setText(selectedPrintingHouse.getAddress());
+                }
+                break;
+
+            case "printing-house-economy-settings-view.fxml":
+                if (selectedPrintingHouse != null) {
+                    actionsMenuLabel.setText(selectedPrintingHouse.getName() + " - Economy Settings:");
+                    EconomyConfig economyConfig = selectedPrintingHouse.getEconomyConfig();
+                    PaperPrice paperPrice = economyConfig.paperPrice;
+
+                    SpinnerValueFactory<Double> glossyPriceFactory =
+                            new SpinnerValueFactory.DoubleSpinnerValueFactory(0.00, 10.00,
+                                    paperPrice.getPrice(PaperType.GLOSSY, PaperSize.A5).doubleValue(), 0.05);
+                    glossyPriceFactory.setConverter(doubleStringConverter);
+                    glossyPriceEditTextBox.setValueFactory(glossyPriceFactory);
+
+                    SpinnerValueFactory<Double> normalPriceFactory =
+                            new SpinnerValueFactory.DoubleSpinnerValueFactory(0.00, 10.00,
+                                    paperPrice.getPrice(PaperType.NORMAL, PaperSize.A5).doubleValue(), 0.05);
+                    normalPriceFactory.setConverter(doubleStringConverter);
+                    normalPriceEditTextBox.setValueFactory(normalPriceFactory);
+
+                    SpinnerValueFactory<Double> newsprintPriceFactory =
+                            new SpinnerValueFactory.DoubleSpinnerValueFactory(0.00, 10.00,
+                                    paperPrice.getPrice(PaperType.NEWSPRINT, PaperSize.A5).doubleValue(), 0.05);
+                    newsprintPriceFactory.setConverter(doubleStringConverter);
+                    newsprintPriceEditTextBox.setValueFactory(newsprintPriceFactory);
+
+                    SpinnerValueFactory<Double> sizePercentageMultiplierFactory =
+                            new SpinnerValueFactory.DoubleSpinnerValueFactory(0.00, 100.00,
+                                    paperPrice.getSizePercentageMultiplier(), 1.00);
+                    sizePercentageMultiplierFactory.setConverter(doubleStringConverter);
+                    sizePercentageMultiplierEditTextBox.setValueFactory(sizePercentageMultiplierFactory);
+
+                    SpinnerValueFactory<Double> baseSalaryFactory2 =
+                            new SpinnerValueFactory.DoubleSpinnerValueFactory(1.00, 100000.00,
+                                    economyConfig.baseSalary.doubleValue(), 100.00);
+                    baseSalaryFactory2.setConverter(doubleStringConverter);
+                    baseSalaryEditTextBox.setValueFactory(baseSalaryFactory2);
+
+                    SpinnerValueFactory<Double> salaryBonusFactory2 =
+                            new SpinnerValueFactory.DoubleSpinnerValueFactory(0.00, 100.00,
+                                    economyConfig.bonusPercentage, 0.25);
+                    salaryBonusFactory2.setConverter(doubleStringConverter);
+                    salaryBonusEditTextBox.setValueFactory(salaryBonusFactory2);
+
+                    SpinnerValueFactory<Double> discountFactory2 =
+                            new SpinnerValueFactory.DoubleSpinnerValueFactory(0.00, 100.00,
+                                    economyConfig.discountPercentage, 0.25);
+                    discountFactory2.setConverter(doubleStringConverter);
+                    discountEditTextBox.setValueFactory(discountFactory2);
+                }
+                break;
         }
     }
 

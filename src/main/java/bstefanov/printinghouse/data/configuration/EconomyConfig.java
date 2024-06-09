@@ -17,4 +17,11 @@ public class EconomyConfig {
         this.paperPrice = paperPrice;
         this.baseSalary = baseSalary;
     }
+
+    public EconomyConfig() {
+        this.bonusPercentage = 1.0;
+        this.discountPercentage = 1.0;
+        this.paperPrice = new PaperPrice();
+        this.baseSalary = BigDecimal.ONE;
+    }
 }
