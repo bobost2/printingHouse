@@ -1,5 +1,6 @@
 package bstefanov.printinghouse.ui.utils;
 
+import bstefanov.printinghouse.data.employee.Employee;
 import bstefanov.printinghouse.data.printer.Printer;
 import bstefanov.printinghouse.service.PrintingHouseService;
 import javafx.event.ActionEvent;
@@ -24,6 +25,7 @@ public class SceneAndDataManagerSingleton {
     private ArrayList<PrintingHouseService> printingHouses = new ArrayList<>();
     private PrintingHouseService selectedPrintingHouse;
     private Printer selectedPrinter;
+    private Employee selectedEmployee;
 
     private SceneAndDataManagerSingleton() {
         String userOS = System.getProperty("os.name").toLowerCase();
@@ -67,6 +69,14 @@ public class SceneAndDataManagerSingleton {
 
     public void setSelectedPrinter(Printer selectedPrinter) {
         this.selectedPrinter = selectedPrinter;
+    }
+
+    public Employee getSelectedEmployee() {
+        return selectedEmployee;
+    }
+
+    public void setSelectedEmployee(Employee selectedEmployee) {
+        this.selectedEmployee = selectedEmployee;
     }
 
     public void switchPane(ActionEvent event, String fxml) throws IOException {

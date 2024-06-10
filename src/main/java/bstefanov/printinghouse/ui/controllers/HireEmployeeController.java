@@ -65,7 +65,7 @@ public class HireEmployeeController implements Initializable {
                 selectedPrintingHouse.hireEmployee(manager);
 
             } else {
-                int selectedIndex = positionChoiceBox.getSelectionModel().getSelectedIndex() - 1;
+                int selectedIndex = managerChoiceBox.getSelectionModel().getSelectedIndex();
                 Operator operator = new Operator(name, managers.get(selectedIndex));
                 selectedPrintingHouse.hireEmployee(operator);
             }

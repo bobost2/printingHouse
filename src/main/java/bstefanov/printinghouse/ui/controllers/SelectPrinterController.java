@@ -84,6 +84,7 @@ public class SelectPrinterController implements Initializable {
 
             printerViewTable.setRowFactory( rf -> {
                 TableRow<PrinterTableStruct> row = new TableRow<>();
+                //noinspection DuplicatedCode
                 row.setOnMouseClicked(event -> {
                     if (event.getClickCount() == 2 && (! row.isEmpty()) ) {
                         try {
