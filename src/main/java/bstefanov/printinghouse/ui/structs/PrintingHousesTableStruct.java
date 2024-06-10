@@ -3,14 +3,22 @@ package bstefanov.printinghouse.ui.structs;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
-public class TableStruct {
-    public int id;
-    public StringProperty name;
-    public StringProperty address;
+public class PrintingHousesTableStruct {
+    private int id;
+    private StringProperty name;
+    private StringProperty address;
 
-    public TableStruct() {
+    public PrintingHousesTableStruct() {
         this.name = new SimpleStringProperty();
         this.address = new SimpleStringProperty();
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getName() {

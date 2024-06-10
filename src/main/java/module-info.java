@@ -15,5 +15,6 @@ module bstefanov.printinghouse {
 
     exports bstefanov.printinghouse.service;
     exports bstefanov.printinghouse.ui.utils;
+    exports bstefanov.printinghouse.data.printer;
     opens bstefanov.printinghouse.ui.utils to javafx.base, javafx.fxml;
 }

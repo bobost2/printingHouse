@@ -1,5 +1,6 @@
 package bstefanov.printinghouse.ui.utils;
 
+import bstefanov.printinghouse.data.printer.Printer;
 import bstefanov.printinghouse.service.PrintingHouseService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
@@ -22,6 +23,7 @@ public class SceneAndDataManagerSingleton {
     @SuppressWarnings("FieldMayBeFinal")
     private ArrayList<PrintingHouseService> printingHouses = new ArrayList<>();
     private PrintingHouseService selectedPrintingHouse;
+    private Printer selectedPrinter;
 
     private SceneAndDataManagerSingleton() {
         String userOS = System.getProperty("os.name").toLowerCase();
@@ -57,6 +59,14 @@ public class SceneAndDataManagerSingleton {
 
     public void setSelectedPrintingHouse(PrintingHouseService selectedPrintingHouse) {
         this.selectedPrintingHouse = selectedPrintingHouse;
+    }
+
+    public Printer getSelectedPrinter() {
+        return selectedPrinter;
+    }
+
+    public void setSelectedPrinter(Printer selectedPrinter) {
+        this.selectedPrinter = selectedPrinter;
     }
 
     public void switchPane(ActionEvent event, String fxml) throws IOException {

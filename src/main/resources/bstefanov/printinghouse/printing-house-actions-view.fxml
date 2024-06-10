@@ -9,7 +9,6 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="0.0" minWidth="0.0" prefHeight="400.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bstefanov.printinghouse.ui.controllers.PrintingHouseActionsController">
    <top>
       <AnchorPane prefHeight="50.0" prefWidth="600.0" style="-fx-background-color: #575a8f;" BorderPane.alignment="CENTER">
@@ -29,22 +28,22 @@
                <children>
                   <HBox alignment="BOTTOM_CENTER" prefHeight="100.0" prefWidth="200.0" spacing="30.0">
                      <children>
-                        <Button mnemonicParsing="false" prefWidth="130.0" style="-fx-background-color: #938acf;" text="Start Day" textFill="WHITE">
+                        <Button fx:id="startDayButton" mnemonicParsing="false" prefWidth="150.0" style="-fx-background-color: #938acf;" text="Start Day" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="14.0" />
                            </font>
                         </Button>
-                        <Button disable="true" mnemonicParsing="false" prefWidth="130.0" style="-fx-background-color: #938acf;" text="End Day" textFill="WHITE">
+                        <Button fx:id="endDayButton" disable="true" mnemonicParsing="false" prefWidth="150.0" style="-fx-background-color: #938acf;" text="End Day" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="14.0" />
                            </font>
                         </Button>
-                        <Button mnemonicParsing="false" prefWidth="130.0" style="-fx-background-color: #938acf;" text="Add Books" textFill="WHITE">
+                        <Button mnemonicParsing="false" prefWidth="150.0" style="-fx-background-color: #938acf;" text="Books to Print" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="14.0" />
                            </font>
                         </Button>
-                        <Button disable="true" mnemonicParsing="false" prefWidth="130.0" style="-fx-background-color: #938acf;" text="Sell Books" textFill="WHITE">
+                        <Button fx:id="sellBooksButton" disable="true" mnemonicParsing="false" prefWidth="150.0" style="-fx-background-color: #938acf;" text="Sell Books" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="14.0" />
                            </font>
@@ -56,17 +55,22 @@
                   </HBox>
                   <HBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="200.0" spacing="30.0">
                      <children>
-                        <Button mnemonicParsing="false" prefWidth="130.0" style="-fx-background-color: #938acf;" text="Manage Printers" textFill="WHITE">
+                        <Button mnemonicParsing="false" onAction="#onClickManageEmployeesButton" prefWidth="150.0" style="-fx-background-color: #938acf;" text="Manage Employees" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="14.0" />
                            </font>
                         </Button>
-                        <Button mnemonicParsing="false" onAction="#onClickSettingsButton" prefWidth="130.0" style="-fx-background-color: #938acf;" text="Setttings" textFill="WHITE">
+                        <Button mnemonicParsing="false" onAction="#onClickManagePrintersButton" prefWidth="150.0" style="-fx-background-color: #938acf;" text="Manage Printers" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="14.0" />
                            </font>
                         </Button>
-                        <Button mnemonicParsing="false" onAction="#onClickExitButton" prefWidth="130.0" style="-fx-background-color: #938acf;" text="Exit" textFill="WHITE">
+                        <Button mnemonicParsing="false" onAction="#onClickSettingsButton" prefWidth="150.0" style="-fx-background-color: #938acf;" text="Settings" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </Button>
+                        <Button mnemonicParsing="false" onAction="#onClickExitButton" prefWidth="150.0" style="-fx-background-color: #938acf;" text="Exit" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="14.0" />
                            </font>

@@ -68,7 +68,7 @@ public class EmployeeService {
 
     public void setBonuses(double bonusPercentage) {
         for (Employee employee : employees) {
-            if (employee.getClass() == Manager.class)
+            if (employee instanceof Manager)
             {
                 ((Manager) employee).setBonus(bonusPercentage);
             }

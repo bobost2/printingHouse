@@ -1,6 +1,6 @@
 package bstefanov.printinghouse.ui.controllers;
 
-import bstefanov.printinghouse.ui.structs.TableStruct;
+import bstefanov.printinghouse.ui.structs.PrintingHousesTableStruct;
 import bstefanov.printinghouse.ui.utils.SceneAndDataManagerSingleton;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -17,17 +17,17 @@ import java.util.ResourceBundle;
 public class SelectPrintingHouseController implements Initializable {
 
     @FXML
-    private TableView<TableStruct> printingHouseSelectionTable;
+    private TableView<PrintingHousesTableStruct> printingHouseSelectionTable;
 
     @FXML
-    private TableColumn<TableStruct, String> printingHouseNameColumn;
+    private TableColumn<PrintingHousesTableStruct, String> printingHouseNameColumn;
 
     @FXML
-    private TableColumn<TableStruct, String> printingHouseAddressColumn;
+    private TableColumn<PrintingHousesTableStruct, String> printingHouseAddressColumn;
 
-    private void onSelectPrintingHouse(ActionEvent actionEvent, TableStruct tableStruct) throws IOException {
+    private void onSelectPrintingHouse(ActionEvent actionEvent, PrintingHousesTableStruct tableStruct) throws IOException {
         SceneAndDataManagerSingleton sceneAndDataMng = SceneAndDataManagerSingleton.getInstance();
-        sceneAndDataMng.setSelectedPrintingHouse(sceneAndDataMng.getPrintingHouses().get(tableStruct.id));
+        sceneAndDataMng.setSelectedPrintingHouse(sceneAndDataMng.getPrintingHouses().get(tableStruct.getId()));
         onClickMenuPrintingHouseActions(actionEvent);
     }
 
@@ -57,15 +57,15 @@ public class SelectPrintingHouseController implements Initializable {
 
         printingHouseSelectionTable.getItems().clear();
         for (int i = 0; i < sceneAndDataMng.getPrintingHouses().size(); i++) {
-            TableStruct tableStruct = new TableStruct();
-            tableStruct.id = i;
+            PrintingHousesTableStruct tableStruct = new PrintingHousesTableStruct();
+            tableStruct.setId(i);
             tableStruct.setName(sceneAndDataMng.getPrintingHouses().get(i).getName());
             tableStruct.setAddress(sceneAndDataMng.getPrintingHouses().get(i).getAddress());
             printingHouseSelectionTable.getItems().add(tableStruct);
         }
 
-        printingHouseSelectionTable.setRowFactory( tv -> {
-            TableRow<TableStruct> row = new TableRow<>();
+        printingHouseSelectionTable.setRowFactory( rf -> {
+            TableRow<PrintingHousesTableStruct> row = new TableRow<>();
             row.setOnMouseClicked(event -> {
                 if (event.getClickCount() == 2 && (! row.isEmpty()) ) {
                     try {
