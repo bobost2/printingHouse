@@ -52,8 +52,7 @@ public class SelectEmployeeController implements Initializable {
     private void onTableRowClick(ActionEvent event, EmployeeTableStruct tableStruct) throws IOException {
         SceneAndDataManagerSingleton sceneAndDataMng = SceneAndDataManagerSingleton.getInstance();
         sceneAndDataMng.setSelectedEmployee(tableStruct.getEmployee());
-        System.out.println("Selected employee: " + tableStruct.getEmployee().getName());
-        //sceneAndDataMng.switchPane(event, "employee-actions-view.fxml");
+        sceneAndDataMng.switchPane(event, "manage-employee-view.fxml");
     }
 
     @Override
