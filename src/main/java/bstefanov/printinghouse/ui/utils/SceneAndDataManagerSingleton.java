@@ -1,5 +1,6 @@
 package bstefanov.printinghouse.ui.utils;
 
+import bstefanov.printinghouse.data.edition.Edition;
 import bstefanov.printinghouse.data.employee.Employee;
 import bstefanov.printinghouse.data.printer.Printer;
 import bstefanov.printinghouse.service.PrintingHouseService;
@@ -26,6 +27,7 @@ public class SceneAndDataManagerSingleton {
     private PrintingHouseService selectedPrintingHouse;
     private Printer selectedPrinter;
     private Employee selectedEmployee;
+    private Edition selectedEdition;
 
     private SceneAndDataManagerSingleton() {
         String userOS = System.getProperty("os.name").toLowerCase();
@@ -77,6 +79,14 @@ public class SceneAndDataManagerSingleton {
 
     public void setSelectedEmployee(Employee selectedEmployee) {
         this.selectedEmployee = selectedEmployee;
+    }
+
+    public Edition getSelectedEdition() {
+        return selectedEdition;
+    }
+
+    public void setSelectedEdition(Edition selectedEdition) {
+        this.selectedEdition = selectedEdition;
     }
 
     public void switchPane(ActionEvent event, String fxml) throws IOException {

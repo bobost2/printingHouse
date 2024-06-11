@@ -24,7 +24,13 @@ public class PrintingHouseActionsController implements Initializable {
     private Button endDayButton;
 
     @FXML
-    private Button sellBooksButton;
+    private Button sellEditionsButton;
+
+    @FXML
+    protected void onClickListEditionsButton(ActionEvent event) throws IOException {
+        SceneAndDataManagerSingleton sceneAndDataMng = SceneAndDataManagerSingleton.getInstance();
+        sceneAndDataMng.switchPane(event, "list-edition-view.fxml");
+    }
 
     @FXML
     protected void onClickManageEmployeesButton(ActionEvent event) throws IOException {
@@ -57,7 +63,7 @@ public class PrintingHouseActionsController implements Initializable {
         if (selectedPrintingHouse != null) {
             startDayButton.setDisable(selectedPrintingHouse.isDayStarted());
             endDayButton.setDisable(!selectedPrintingHouse.isDayStarted());
-            sellBooksButton.setDisable(!selectedPrintingHouse.isDayStarted());
+            sellEditionsButton.setDisable(!selectedPrintingHouse.isDayStarted());
         }
     }
 

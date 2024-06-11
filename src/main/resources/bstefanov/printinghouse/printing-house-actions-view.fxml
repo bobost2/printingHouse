@@ -38,12 +38,12 @@
                               <Font name="System Bold" size="14.0" />
                            </font>
                         </Button>
-                        <Button mnemonicParsing="false" prefWidth="150.0" style="-fx-background-color: #938acf;" text="Books to Print" textFill="WHITE">
+                        <Button mnemonicParsing="false" onAction="#onClickListEditionsButton" prefWidth="150.0" style="-fx-background-color: #938acf;" text="Editions to Print" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="14.0" />
                            </font>
                         </Button>
-                        <Button fx:id="sellBooksButton" disable="true" mnemonicParsing="false" prefWidth="150.0" style="-fx-background-color: #938acf;" text="Sell Books" textFill="WHITE">
+                        <Button fx:id="sellEditionsButton" disable="true" mnemonicParsing="false" prefWidth="150.0" style="-fx-background-color: #938acf;" text="Sell Editions" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="14.0" />
                            </font>

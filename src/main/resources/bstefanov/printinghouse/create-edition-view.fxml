@@ -1,0 +1,324 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Spinner?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="1.7976931348623157E308" prefHeight="459.0" prefWidth="710.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bstefanov.printinghouse.ui.controllers.CreateEditionController">
+   <top>
+      <AnchorPane maxHeight="50.0" minHeight="50.0" prefHeight="50.0" style="-fx-background-color: #575a8f;" BorderPane.alignment="CENTER">
+         <children>
+            <Label fx:id="actionsMenuLabel" alignment="CENTER" prefHeight="50.0" text="#PrintingHouse# - Add Edition:" textFill="#cdcdcd" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <font>
+                  <Font name="System Bold" size="20.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+   </top>
+   <bottom>
+      <AnchorPane prefHeight="50.0" style="-fx-background-color: #575a8f;" BorderPane.alignment="CENTER">
+         <children>
+            <Button mnemonicParsing="false" onAction="#onClickGoBackButton" style="-fx-background-color: #ff5e6c;" text="Go Back" textFill="WHITE" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="10.0">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Button>
+            <Button fx:id="editEditionButton" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#onClickEditButton" style="-fx-background-color: #709dff;" text="Add Edition" textFill="WHITE" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Button>
+         </children>
+      </AnchorPane>
+   </bottom>
+   <center>
+      <AnchorPane maxWidth="1.7976931348623157E308" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #454773;" BorderPane.alignment="CENTER">
+         <children>
+            <VBox alignment="CENTER" maxWidth="1.7976931348623157E308" prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <children>
+                  <Label text="Edit base info:" textFill="#cdcdcd">
+                     <font>
+                        <Font name="System Bold" size="20.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets bottom="5.0" />
+                     </VBox.margin>
+                  </Label>
+                  <HBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <GridPane alignment="CENTER" maxHeight="130.0" maxWidth="1.7976931348623157E308" minHeight="130.0" prefHeight="130.0" prefWidth="580.0">
+                           <columnConstraints>
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="130.0" prefWidth="130.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="197.0" minWidth="100.0" prefWidth="179.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="175.0" minWidth="83.0" prefWidth="101.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="100.0" prefWidth="100.0" />
+                           </columnConstraints>
+                           <rowConstraints>
+                              <RowConstraints minHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                           </rowConstraints>
+                           <children>
+                              <Label text="Title:" textFill="#cdcdcd">
+                                 <font>
+                                    <Font name="System Bold" size="16.0" />
+                                 </font>
+                              </Label>
+                              <Label text="Type:" textFill="#cdcdcd" GridPane.rowIndex="1">
+                                 <font>
+                                    <Font name="System Bold" size="16.0" />
+                                 </font>
+                              </Label>
+                              <Label text="Paper size:" textFill="#cdcdcd" GridPane.columnIndex="2">
+                                 <font>
+                                    <Font name="System Bold" size="16.0" />
+                                 </font>
+                              </Label>
+                              <Label text="Paper type:" textFill="#cdcdcd" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                                 <font>
+                                    <Font name="System Bold" size="16.0" />
+                                 </font>
+                              </Label>
+                              <Label text="Amount of pages:" textFill="#cdcdcd" GridPane.rowIndex="2">
+                                 <font>
+                                    <Font name="System Bold" size="16.0" />
+                                 </font>
+                              </Label>
+                              <Spinner fx:id="pagesSpinner" editable="true" maxHeight="25.0" maxWidth="80.0" prefHeight="25.0" prefWidth="80.0" style="-fx-base: #938acf;" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                              <Label text="Price:" textFill="#cdcdcd" GridPane.columnIndex="2" GridPane.rowIndex="2">
+                                 <font>
+                                    <Font name="System Bold" size="16.0" />
+                                 </font>
+                              </Label>
+                              <Spinner fx:id="priceSpinner" editable="true" maxHeight="25.0" maxWidth="80.0" prefHeight="25.0" prefWidth="80.0" style="-fx-base: #938acf;" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+                              <ChoiceBox fx:id="typeChoiceBox" prefHeight="25.0" prefWidth="140.0" onAction="#onEditionTypeChange" style="-fx-background-color: #938acf; -fx-base: #938acf;" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                              <ChoiceBox fx:id="paperSizeChoiceBox" prefHeight="25.0" prefWidth="100.0" style="-fx-background-color: #938acf; -fx-base: #938acf;" GridPane.columnIndex="3" />
+                              <ChoiceBox fx:id="paperTypeChoiceBox" prefHeight="25.0" prefWidth="100.0" style="-fx-background-color: #938acf; -fx-base: #938acf;" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+                              <TextField fx:id="titleTextField" maxHeight="-Infinity" maxWidth="170.0" prefHeight="25.0" prefWidth="170.0" style="-fx-background-color: #938acf;" GridPane.columnIndex="1">
+                                 <opaqueInsets>
+                                    <Insets />
+                                 </opaqueInsets>
+                              </TextField>
+                           </children>
+                        </GridPane>
+                     </children>
+                  </HBox>
+                  <Label fx:id="addFieldsLabel" text="Edit additional fields:" textFill="#cdcdcd" visible="false">
+                     <font>
+                        <Font name="System Bold" size="20.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets bottom="5.0" top="20.0" />
+                     </VBox.margin>
+                  </Label>
+                  <HBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <StackPane>
+                           <children>
+                              <GridPane fx:id="bookGridPane" alignment="CENTER" maxHeight="130.0" maxWidth="1.7976931348623157E308" minHeight="130.0" prefHeight="130.0" prefWidth="580.0" visible="false">
+                                 <columnConstraints>
+                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="70.0" minWidth="70.0" prefWidth="70.0" />
+                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="180.0" minWidth="180.0" prefWidth="180.0" />
+                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="90.0" minWidth="90.0" prefWidth="90.0" />
+                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="160.0" minWidth="160.0" prefWidth="160.0" />
+                                 </columnConstraints>
+                                 <rowConstraints>
+                                    <RowConstraints maxHeight="45.0" minHeight="45.0" prefHeight="45.0" vgrow="SOMETIMES" />
+                                    <RowConstraints maxHeight="45.0" minHeight="45.0" prefHeight="45.0" vgrow="SOMETIMES" />
+                                 </rowConstraints>
+                                 <children>
+                                    <Label text="Author:" textFill="#cdcdcd">
+                                       <font>
+                                          <Font name="System Bold" size="16.0" />
+                                       </font>
+                                    </Label>
+                                    <Label text="Genre:" textFill="#cdcdcd" GridPane.rowIndex="1">
+                                       <font>
+                                          <Font name="System Bold" size="16.0" />
+                                       </font>
+                                    </Label>
+                                    <Label text="ISBN:" textFill="#cdcdcd" GridPane.columnIndex="2">
+                                       <font>
+                                          <Font name="System Bold" size="16.0" />
+                                       </font>
+                                    </Label>
+                                    <Label text="Publisher:" textFill="#cdcdcd" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                                       <font>
+                                          <Font name="System Bold" size="16.0" />
+                                       </font>
+                                    </Label>
+                                    <TextField fx:id="bookAuthorTextField" maxHeight="-Infinity" maxWidth="150.0" prefHeight="25.0" prefWidth="150.0" style="-fx-background-color: #938acf;" GridPane.columnIndex="1">
+                                       <opaqueInsets>
+                                          <Insets />
+                                       </opaqueInsets>
+                                    </TextField>
+                                    <TextField fx:id="bookGenreTextField" maxHeight="-Infinity" maxWidth="150.0" prefHeight="25.0" prefWidth="150.0" style="-fx-background-color: #938acf;" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                       <opaqueInsets>
+                                          <Insets />
+                                       </opaqueInsets>
+                                    </TextField>
+                                    <TextField fx:id="bookISBNTextField" maxHeight="-Infinity" maxWidth="150.0" prefHeight="25.0" prefWidth="150.0" style="-fx-background-color: #938acf;" GridPane.columnIndex="3">
+                                       <opaqueInsets>
+                                          <Insets />
+                                       </opaqueInsets>
+                                    </TextField>
+                                    <TextField fx:id="bookPublisherTextField" maxHeight="-Infinity" maxWidth="150.0" prefHeight="25.0" prefWidth="150.0" style="-fx-background-color: #938acf;" GridPane.columnIndex="3" GridPane.rowIndex="1">
+                                       <opaqueInsets>
+                                          <Insets />
+                                       </opaqueInsets>
+                                    </TextField>
+                                 </children>
+                              </GridPane>
+                              <GridPane fx:id="comicsGridPane" alignment="CENTER" maxHeight="130.0" maxWidth="1.7976931348623157E308" minHeight="130.0" prefHeight="130.0" prefWidth="580.0" visible="false">
+                                 <columnConstraints>
+                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="86.0" minWidth="70.0" prefWidth="86.0" />
+                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="180.0" minWidth="168.0" prefWidth="176.0" />
+                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="90.0" minWidth="90.0" prefWidth="90.0" />
+                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="160.0" minWidth="160.0" prefWidth="160.0" />
+                                 </columnConstraints>
+                                 <rowConstraints>
+                                    <RowConstraints maxHeight="45.0" minHeight="45.0" prefHeight="45.0" vgrow="SOMETIMES" />
+                                    <RowConstraints maxHeight="45.0" minHeight="45.0" prefHeight="45.0" vgrow="SOMETIMES" />
+                                    <RowConstraints maxHeight="45.0" minHeight="45.0" prefHeight="45.0" vgrow="SOMETIMES" />
+                                 </rowConstraints>
+                                 <children>
+                                    <Label text="Author:" textFill="#cdcdcd">
+                                       <font>
+                                          <Font name="System Bold" size="16.0" />
+                                       </font>
+                                    </Label>
+                                    <Label text="Genre:" textFill="#cdcdcd" GridPane.rowIndex="1">
+                                       <font>
+                                          <Font name="System Bold" size="16.0" />
+                                       </font>
+                                    </Label>
+                                    <Label text="ISBN:" textFill="#cdcdcd" GridPane.columnIndex="2">
+                                       <font>
+                                          <Font name="System Bold" size="16.0" />
+                                       </font>
+                                    </Label>
+                                    <Label text="Publisher:" textFill="#cdcdcd" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                                       <font>
+                                          <Font name="System Bold" size="16.0" />
+                                       </font>
+                                    </Label>
+                                    <TextField fx:id="comicAuthorTextField" maxHeight="-Infinity" maxWidth="150.0" prefHeight="25.0" prefWidth="150.0" style="-fx-background-color: #938acf;" GridPane.columnIndex="1">
+                                       <opaqueInsets>
+                                          <Insets />
+                                       </opaqueInsets>
+                                    </TextField>
+                                    <TextField fx:id="comicGenreTextField" maxHeight="-Infinity" maxWidth="150.0" prefHeight="25.0" prefWidth="150.0" style="-fx-background-color: #938acf;" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                       <opaqueInsets>
+                                          <Insets />
+                                       </opaqueInsets>
+                                    </TextField>
+                                    <TextField fx:id="comicsISBNTextField" maxHeight="-Infinity" maxWidth="150.0" prefHeight="25.0" prefWidth="150.0" style="-fx-background-color: #938acf;" GridPane.columnIndex="3">
+                                       <opaqueInsets>
+                                          <Insets />
+                                       </opaqueInsets>
+                                    </TextField>
+                                    <TextField fx:id="comicsPublisherTextField" maxHeight="-Infinity" maxWidth="150.0" prefHeight="25.0" prefWidth="150.0" style="-fx-background-color: #938acf;" GridPane.columnIndex="3" GridPane.rowIndex="1">
+                                       <opaqueInsets>
+                                          <Insets />
+                                       </opaqueInsets>
+                                    </TextField>
+                                    <Label text="Illustrator:" textFill="#cdcdcd" GridPane.rowIndex="2">
+                                       <font>
+                                          <Font name="System Bold" size="16.0" />
+                                       </font>
+                                    </Label>
+                                    <TextField fx:id="comicsIllustratorTextField" maxHeight="-Infinity" maxWidth="150.0" prefHeight="25.0" prefWidth="150.0" style="-fx-background-color: #938acf;" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                       <opaqueInsets>
+                                          <Insets />
+                                       </opaqueInsets>
+                                    </TextField>
+                                 </children>
+                              </GridPane>
+                              <GridPane fx:id="newspaperGridPane" alignment="CENTER" maxHeight="130.0" maxWidth="1.7976931348623157E308" minHeight="130.0" prefHeight="130.0" prefWidth="580.0" visible="false">
+                                 <columnConstraints>
+                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="140.66665649414062" minWidth="70.0" prefWidth="140.66665649414062" />
+                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="180.0" minWidth="109.33334350585938" prefWidth="109.33334350585938" />
+                                 </columnConstraints>
+                                 <rowConstraints>
+                                    <RowConstraints maxHeight="45.0" minHeight="45.0" prefHeight="45.0" vgrow="SOMETIMES" />
+                                    <RowConstraints maxHeight="45.0" minHeight="45.0" prefHeight="45.0" vgrow="SOMETIMES" />
+                                 </rowConstraints>
+                                 <children>
+                                    <Label text="Publication date:" textFill="#cdcdcd">
+                                       <font>
+                                          <Font name="System Bold" size="16.0" />
+                                       </font>
+                                    </Label>
+                                    <Label text="Publisher:" textFill="#cdcdcd" GridPane.rowIndex="1">
+                                       <font>
+                                          <Font name="System Bold" size="16.0" />
+                                       </font>
+                                    </Label>
+                                    <TextField fx:id="newspaperPublisherTextField" maxHeight="-Infinity" maxWidth="150.0" prefHeight="25.0" prefWidth="150.0" style="-fx-background-color: #938acf;" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                       <opaqueInsets>
+                                          <Insets />
+                                       </opaqueInsets>
+                                    </TextField>
+                                    <DatePicker fx:id="newspaperPublicationDateDatePicker" promptText="Enter date" style="-fx-background-color: #938acf; -fx-base: #938acf;" GridPane.columnIndex="1" />
+                                 </children>
+                              </GridPane>
+                              <GridPane fx:id="posterGridPane" alignment="CENTER" maxHeight="130.0" maxWidth="1.7976931348623157E308" minHeight="130.0" prefHeight="130.0" prefWidth="580.0" visible="false">
+                                 <columnConstraints>
+                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="70.0" minWidth="70.0" prefWidth="70.0" />
+                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="110.0" minWidth="110.0" prefWidth="110.0" />
+                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="60.0" minWidth="60.0" prefWidth="60.0" />
+                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="160.0" minWidth="160.0" prefWidth="160.0" />
+                                 </columnConstraints>
+                                 <rowConstraints>
+                                    <RowConstraints maxHeight="45.0" minHeight="45.0" prefHeight="45.0" vgrow="SOMETIMES" />
+                                    <RowConstraints maxHeight="45.0" minHeight="45.0" prefHeight="45.0" vgrow="SOMETIMES" />
+                                 </rowConstraints>
+                                 <children>
+                                    <Label text="Width:" textFill="#cdcdcd">
+                                       <font>
+                                          <Font name="System Bold" size="16.0" />
+                                       </font>
+                                    </Label>
+                                    <Label text="Height:" textFill="#cdcdcd" GridPane.rowIndex="1">
+                                       <font>
+                                          <Font name="System Bold" size="16.0" />
+                                       </font>
+                                    </Label>
+                                    <Label text="Event:" textFill="#cdcdcd" GridPane.columnIndex="2">
+                                       <font>
+                                          <Font name="System Bold" size="16.0" />
+                                       </font>
+                                    </Label>
+                                    <TextField fx:id="posterEventTextField" maxHeight="-Infinity" maxWidth="150.0" prefHeight="25.0" prefWidth="150.0" style="-fx-background-color: #938acf;" GridPane.columnIndex="3">
+                                       <opaqueInsets>
+                                          <Insets />
+                                       </opaqueInsets>
+                                    </TextField>
+                                    <Spinner fx:id="posterWidthSpinner" editable="true" maxHeight="25.0" maxWidth="90.0" prefHeight="25.0" prefWidth="90.0" style="-fx-base: #938acf;" GridPane.columnIndex="1" />
+                                    <Spinner fx:id="posterHeightSpinner" editable="true" maxHeight="25.0" maxWidth="90.0" prefHeight="25.0" prefWidth="90.0" style="-fx-base: #938acf;" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                 </children>
+                              </GridPane>
+                           </children>
+                        </StackPane>
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+         </children>
+      </AnchorPane>
+   </center>
+</BorderPane>
