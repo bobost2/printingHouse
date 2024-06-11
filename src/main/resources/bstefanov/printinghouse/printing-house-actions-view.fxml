@@ -28,7 +28,7 @@
                <children>
                   <HBox alignment="BOTTOM_CENTER" prefHeight="100.0" prefWidth="200.0" spacing="30.0">
                      <children>
-                        <Button fx:id="startDayButton" mnemonicParsing="false" prefWidth="150.0" style="-fx-background-color: #938acf;" text="Start Day" textFill="WHITE">
+                        <Button fx:id="startDayButton" mnemonicParsing="false" onAction="#onClickStartDayButton" prefWidth="150.0" style="-fx-background-color: #938acf;" text="Start Day" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="14.0" />
                            </font>

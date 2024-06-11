@@ -1,15 +1,18 @@
 package bstefanov.printinghouse.ui.controllers;
 
 import bstefanov.printinghouse.service.PrintingHouseService;
+import bstefanov.printinghouse.ui.utils.DoubleStringConverter;
 import bstefanov.printinghouse.ui.utils.SceneAndDataManagerSingleton;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
+import javafx.scene.control.*;
+import javafx.scene.layout.VBox;
 
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.net.URL;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class PrintingHouseActionsController implements Initializable {
@@ -25,6 +28,43 @@ public class PrintingHouseActionsController implements Initializable {
 
     @FXML
     private Button sellEditionsButton;
+
+    @FXML
+    protected void onClickStartDayButton() {
+        SceneAndDataManagerSingleton sceneAndDataMng = SceneAndDataManagerSingleton.getInstance();
+        PrintingHouseService selectedPrintingHouse = sceneAndDataMng.getSelectedPrintingHouse();
+        if (selectedPrintingHouse != null) {
+
+            Dialog<Double> dialog = new Dialog<>();
+            dialog.setTitle("Set target revenue");
+            dialog.setHeaderText("Please enter the target revenue for the day before beginning the day");
+
+            Spinner<Double> spinner = new Spinner<>();
+            spinner.setValueFactory(new SpinnerValueFactory.DoubleSpinnerValueFactory(0, 50000, 500, 100));
+            spinner.getValueFactory().setConverter(DoubleStringConverter.getConverter());
+
+            VBox vbox = new VBox(spinner);
+            dialog.getDialogPane().setContent(vbox);
+
+            ButtonType okButtonType = new ButtonType("Begin Day", ButtonBar.ButtonData.OK_DONE);
+            ButtonType cancelButtonType = new ButtonType("Cancel", ButtonBar.ButtonData.CANCEL_CLOSE);
+            dialog.getDialogPane().getButtonTypes().addAll(okButtonType, cancelButtonType);
+
+            dialog.setResultConverter(dialogButton -> {
+                if (dialogButton == okButtonType) {
+                    return spinner.getValue();
+                }
+                return null;
+            });
+
+            Optional<Double> result = dialog.showAndWait();
+            result.ifPresent(value -> {
+                selectedPrintingHouse.setExpectedRevenue(BigDecimal.valueOf(value));
+                selectedPrintingHouse.startDay();
+                refreshButtons();
+            });
+        }
+    }
 
     @FXML
     protected void onClickListEditionsButton(ActionEvent event) throws IOException {

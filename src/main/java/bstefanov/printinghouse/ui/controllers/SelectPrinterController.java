@@ -52,9 +52,7 @@ public class SelectPrinterController implements Initializable {
     private void onTableRowClick(ActionEvent event, PrinterTableStruct tableStruct) throws IOException {
         SceneAndDataManagerSingleton sceneAndDataMng = SceneAndDataManagerSingleton.getInstance();
         sceneAndDataMng.setSelectedPrinter(tableStruct.getPrinter());
-        System.out.println("Selected printer: " + tableStruct.getPrinter().getModel());
-        System.out.println("Not implemented yet.");
-//        sceneAndDataMng.switchPane(event, "select-printer-view.fxml");
+        sceneAndDataMng.switchPane(event, "manage-printer-view.fxml");
     }
 
     @Override
