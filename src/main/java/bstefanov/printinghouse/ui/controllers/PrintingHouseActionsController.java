@@ -1,5 +1,6 @@
 package bstefanov.printinghouse.ui.controllers;
 
+import bstefanov.printinghouse.data.audit.FinalReport;
 import bstefanov.printinghouse.service.PrintingHouseService;
 import bstefanov.printinghouse.ui.utils.DoubleStringConverter;
 import bstefanov.printinghouse.ui.utils.SceneAndDataManagerSingleton;
@@ -67,9 +68,36 @@ public class PrintingHouseActionsController implements Initializable {
     }
 
     @FXML
+    protected void onClickEndDayButton(ActionEvent event) throws IOException {
+        SceneAndDataManagerSingleton sceneAndDataMng = SceneAndDataManagerSingleton.getInstance();
+        PrintingHouseService selectedPrintingHouse = sceneAndDataMng.getSelectedPrintingHouse();
+        if (selectedPrintingHouse != null) {
+            Alert alert = new Alert(Alert.AlertType.WARNING, "", ButtonType.OK, ButtonType.CANCEL);
+            alert.setTitle("End Day");
+            alert.setHeaderText("Are you sure you want to end the day?");
+            alert.setContentText("This action cannot be undone.");
+            Optional<ButtonType> alertResult = alert.showAndWait();
+            if (alertResult.isPresent() && alertResult.get() == ButtonType.OK) {
+                FinalReport finalReport = selectedPrintingHouse.endDayAndGetReport();
+                sceneAndDataMng.setFinalReport(finalReport);
+                sceneAndDataMng.setReportOpenedFromFile(false);
+
+                refreshButtons();
+                sceneAndDataMng.switchPane(event, "report-printing-house-view.fxml");
+            }
+        }
+    }
+
+    @FXML
     protected void onClickListEditionsButton(ActionEvent event) throws IOException {
         SceneAndDataManagerSingleton sceneAndDataMng = SceneAndDataManagerSingleton.getInstance();
         sceneAndDataMng.switchPane(event, "list-edition-view.fxml");
+    }
+
+    @FXML
+    protected void onClickSellEditionsButton(ActionEvent event) throws IOException {
+        SceneAndDataManagerSingleton sceneAndDataMng = SceneAndDataManagerSingleton.getInstance();
+        sceneAndDataMng.switchPane(event, "sell-edition-view.fxml");
     }
 
     @FXML

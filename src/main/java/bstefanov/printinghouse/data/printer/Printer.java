@@ -5,12 +5,13 @@ import bstefanov.printinghouse.exceptions.printer.PrinterColorsNotSupportedExcep
 import bstefanov.printinghouse.exceptions.printer.PrinterNotEnoughPaperException;
 import bstefanov.printinghouse.exceptions.printer.PrinterTooMuchPaperException;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
 
-public class Printer {
+public class Printer implements Serializable {
     private final UUID id;
     private final String model;
     private final int maxAmountOfPaper;

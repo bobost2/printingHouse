@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bstefanov.printinghouse.ui.controllers.SellEditionsController">
+   <top>
+      <AnchorPane maxHeight="50.0" minHeight="50.0" prefHeight="50.0" style="-fx-background-color: #575a8f;" BorderPane.alignment="CENTER">
+         <children>
+            <Label fx:id="actionsMenuLabel" alignment="CENTER" prefHeight="50.0" text="#PrintingHouse# - Sell Edition:" textFill="#cdcdcd" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <font>
+                  <Font name="System Bold" size="20.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+   </top>
+   <bottom>
+      <AnchorPane prefHeight="50.0" style="-fx-background-color: #575a8f;" BorderPane.alignment="CENTER">
+         <children>
+            <Button mnemonicParsing="false" onAction="#onClickGoBackButton" style="-fx-background-color: #ff5e6c;" text="Go Back" textFill="WHITE" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="10.0">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Button>
+         </children>
+      </AnchorPane>
+   </bottom>
+   <center>
+      <TableView fx:id="editionViewTable" prefHeight="200.0" prefWidth="200.0" stylesheets="@styles/tableStyling.css" BorderPane.alignment="CENTER">
+        <columns>
+          <TableColumn fx:id="titleColumn" editable="false" maxWidth="1.7976931348623157E308" minWidth="70.0" prefWidth="219.0" text="Title" />
+            <TableColumn fx:id="typeColumn" prefWidth="91.0" text="Type" />
+          <TableColumn fx:id="pagesColumn" editable="false" maxWidth="1.7976931348623157E308" minWidth="4.0" prefWidth="142.0" text="Amount of pages" />
+            <TableColumn fx:id="priceColumn" prefWidth="84.0" text="Price" />
+        </columns>
+      </TableView>
+   </center>
+</BorderPane>

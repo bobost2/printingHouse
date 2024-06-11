@@ -1,5 +1,7 @@
 package bstefanov.printinghouse.ui.controllers;
 
+import bstefanov.printinghouse.data.audit.FinalReport;
+import bstefanov.printinghouse.service.SerializingService;
 import bstefanov.printinghouse.ui.utils.SceneAndDataManagerSingleton;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -19,7 +21,7 @@ public class MainController {
     }
 
     @FXML
-    protected void onClickMenuLoadReport(ActionEvent event) {
+    protected void onClickMenuLoadReport(ActionEvent event) throws IOException {
         FileChooser fileChooser = new FileChooser();
         fileChooser.getExtensionFilters().add(
                 new FileChooser.ExtensionFilter("Printing House Report", "*.phr"));
@@ -29,9 +31,13 @@ public class MainController {
 
         File selectedFile = fileChooser.showOpenDialog(stage);
         if (selectedFile != null) {
-            System.out.println("File selected: " + selectedFile.getPath());
-        } else {
-            System.out.println("File selection cancelled.");
+            SerializingService serializingService = new SerializingService();
+
+            FinalReport report = serializingService.loadDayReport(selectedFile.getPath());
+            SceneAndDataManagerSingleton sceneAndDataMng = SceneAndDataManagerSingleton.getInstance();
+            sceneAndDataMng.setFinalReport(report);
+            sceneAndDataMng.setReportOpenedFromFile(true);
+            sceneAndDataMng.switchPane(event, "report-printing-house-view.fxml");
         }
     }
 }

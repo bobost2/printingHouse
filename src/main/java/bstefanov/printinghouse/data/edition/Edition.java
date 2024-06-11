@@ -3,11 +3,12 @@ package bstefanov.printinghouse.data.edition;
 import bstefanov.printinghouse.data.paper.PaperSize;
 import bstefanov.printinghouse.data.paper.PaperType;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Objects;
 import java.util.UUID;
 
-public abstract class Edition {
+public abstract class Edition implements Serializable {
     private final UUID id;
     private String title;
     private int amountOfPages;

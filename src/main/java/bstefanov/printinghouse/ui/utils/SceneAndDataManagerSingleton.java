@@ -1,5 +1,6 @@
 package bstefanov.printinghouse.ui.utils;
 
+import bstefanov.printinghouse.data.audit.FinalReport;
 import bstefanov.printinghouse.data.edition.Edition;
 import bstefanov.printinghouse.data.employee.Employee;
 import bstefanov.printinghouse.data.printer.Printer;
@@ -28,6 +29,8 @@ public class SceneAndDataManagerSingleton {
     private Printer selectedPrinter;
     private Employee selectedEmployee;
     private Edition selectedEdition;
+    private FinalReport finalReport;
+    private boolean reportOpenedFromFile = false;
 
     private SceneAndDataManagerSingleton() {
         String userOS = System.getProperty("os.name").toLowerCase();
@@ -87,6 +90,22 @@ public class SceneAndDataManagerSingleton {
 
     public void setSelectedEdition(Edition selectedEdition) {
         this.selectedEdition = selectedEdition;
+    }
+
+    public FinalReport getFinalReport() {
+        return finalReport;
+    }
+
+    public void setFinalReport(FinalReport finalReport) {
+        this.finalReport = finalReport;
+    }
+
+    public boolean isReportOpenedFromFile() {
+        return reportOpenedFromFile;
+    }
+
+    public void setReportOpenedFromFile(boolean reportOpenedFromFile) {
+        this.reportOpenedFromFile = reportOpenedFromFile;
     }
 
     public void switchPane(ActionEvent event, String fxml) throws IOException {

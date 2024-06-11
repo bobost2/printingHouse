@@ -1,11 +1,12 @@
 package bstefanov.printinghouse.data.employee;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.Objects;
 import java.util.UUID;
 
-public abstract class Employee {
+public abstract class Employee implements Serializable {
     private final UUID id;
     private String name;
     private Date hireDate;

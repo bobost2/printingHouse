@@ -33,7 +33,7 @@
                               <Font name="System Bold" size="14.0" />
                            </font>
                         </Button>
-                        <Button fx:id="endDayButton" disable="true" mnemonicParsing="false" prefWidth="150.0" style="-fx-background-color: #938acf;" text="End Day" textFill="WHITE">
+                        <Button fx:id="endDayButton" disable="true" mnemonicParsing="false" onAction="#onClickEndDayButton" prefWidth="150.0" style="-fx-background-color: #938acf;" text="End Day" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="14.0" />
                            </font>
@@ -43,7 +43,7 @@
                               <Font name="System Bold" size="14.0" />
                            </font>
                         </Button>
-                        <Button fx:id="sellEditionsButton" disable="true" mnemonicParsing="false" prefWidth="150.0" style="-fx-background-color: #938acf;" text="Sell Editions" textFill="WHITE">
+                        <Button fx:id="sellEditionsButton" disable="true" mnemonicParsing="false" onAction="#onClickSellEditionsButton" prefWidth="150.0" style="-fx-background-color: #938acf;" text="Sell Editions" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="14.0" />
                            </font>

@@ -22,6 +22,10 @@ public class AuditingService {
         audit = new ArrayList<>();
     }
 
+    public void clearAudit() {
+        audit.clear();
+    }
+
     public BigDecimal getExpectedProfit() {
         return expectedProfit;
     }

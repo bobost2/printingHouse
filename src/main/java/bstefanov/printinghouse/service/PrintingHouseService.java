@@ -162,7 +162,7 @@ public class PrintingHouseService {
             printedEditions.remove(edition);
         }
 
-        boolean applyDiscount = totalCopies > expectedEditions.get(edition);
+        boolean applyDiscount = totalCopies > expectedEditions.getOrDefault(edition, 0);
 
         auditingService.recordSell(edition, copies, applyDiscount);
     }
@@ -195,6 +195,8 @@ public class PrintingHouseService {
         for ( Printer printer : printingService.getPrinters() ) {
             printer.clearPrintedEditions();
         }
+
+        auditingService.clearAudit();
         employeeService.setBonuses(0);
         isDayStarted = true;
     }
